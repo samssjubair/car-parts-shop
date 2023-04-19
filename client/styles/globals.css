@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+
+
+.home-input-field{
+  width: 90%;
+  height: 700px;
+  border-radius: 5px;
+}
