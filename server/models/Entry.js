@@ -30,7 +30,6 @@ const entrySchema=mongoose.Schema({
         validate: [validator.isEmail, "Please provide a valid email"],
         required: [true, 'Email required'],
         lowercase: true,
-        unique: [  true, 'Email already exists'],
         trim: true,
     },
     phone: {
@@ -47,7 +46,7 @@ const entrySchema=mongoose.Schema({
         type: String,
         default: "pending",
         enum: ["pending","processing", "delivered", "rejected"],
-        required: true
+        // required: true
     }
 
     
