@@ -1,8 +1,7 @@
 const express= require('express');
+const { getAllEntries, saveEntry } = require('../controller/entry.controller');
 const router=express.Router();
 
-router.get('/',(req,res)=>{
-    res.json({message: "This is the entries route"});
-});
+router.route('/').get(getAllEntries).post(saveEntry);
 
 module.exports = router;
