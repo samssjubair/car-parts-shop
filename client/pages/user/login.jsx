@@ -1,8 +1,19 @@
+import { useRouter } from "next/router"
 import Footer from "../components/Footer"
 import Navigation from "../components/Navigation"
 
 
 const login = () => {
+  const router =useRouter();
+
+  const login = (e) =>{
+    e.preventDefault();
+    Cookies.set("login", true);
+    router.push("admin/dashboard");
+  }
+
+
+
   return (
     <div>
       <div>
