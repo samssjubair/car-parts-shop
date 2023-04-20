@@ -75,21 +75,53 @@ const CarFormDocuments = () => {
       console.error(error);
     });
   }, []);
-
-  const [brandName, setBrandName] = useState("");
-  const [productionYear, setProductionYear] = useState("");
-  const [modelName, setModelName] = useState("");
+  
   const [requiredParts, setRequiredParts] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
-  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [address, setAddress] = useState("");
+
+  console.log(requiredParts)
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission logic here
+    console.log(event.target[0].defaultValue);
+    const body={
+      brandName: brand,
+      year: year,
+      modelName: model,
+      requiredParts: requiredParts,
+      quantity: quantity,
+      name: name,
+      email: email,
+      phone: mobile,
+      deliveryAddress: address,
+    }
     console.log(event);
+    fetch('http://localhost:4800/api/v1/entries', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Optionally reset form after successful submission
+      // setFormData({
+      //   name: '',
+      //   email: '',
+      //   mobile: '',
+      //   address: ''
+      // });
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   };
 
 
@@ -99,7 +131,7 @@ const CarFormDocuments = () => {
       <div class="w-1/2 bg-white rounded-lg shadow dark:border md:mt-0  xl:p-0 dark:bg-gray-800 dark:border-gray-700">
   <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-    <form class="space-y-4 md:space-y-6" action="#">
+    <form onSubmit={handleSubmit} class="space-y-4 md:space-y-6" action="#">
       <div>
         <label for="brand-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand Name</label>
         <input value={brand} onChange={onBrandChange} type="text" name="brand-name" id="brand-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter brand name" required=""/>
@@ -184,27 +216,27 @@ const CarFormDocuments = () => {
       </div>
       <div>
         <label for="parts-required" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parts Required</label>
-        <input type="text" name="parts-required" id="parts-required" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter parts required" required=""/>
+        <input value={requiredParts} onChange={(e)=>setRequiredParts(e.target.value)} type="text" name="parts-required" id="parts-required" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter parts required" required=""/>
       </div>
       <div>
         <label for="quantity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity</label>
-        <input type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter quantity" required=""/>
+        <input value={quantity} onChange={(e)=>setQuantity(e.target.value)} type="number" name="quantity" id="quantity" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter quantity" required=""/>
       </div>
       <div>
           <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-          <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required=""/>
+          <input value={name} onChange={(e)=>setName(e.target.value)} type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required=""/>
       </div>
       <div>
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-          <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required=""/>
+          <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required=""/>
       </div>
       <div>
           <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile</label>
-          <input type="tel" name="mobile" id="mobile" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+1 555-555-5555" required=""/>
+          <input value={mobile} onChange={(e)=>setMobile(e.target.value)} type="tel" name="mobile" id="mobile" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+1 555-555-5555" required=""/>
       </div>
       <div>
           <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-          <textarea name="address" id="address" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123 Main St, Anytown USA" required=""></textarea>
+          <textarea value={address} onChange={(e)=>setAddress(e.target.value)} name="address" id="address" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123 Main St, Anytown USA" required=""></textarea>
       </div>
       <div class="flex flex-col items-center">
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Submit</button>
