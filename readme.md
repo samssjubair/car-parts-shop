@@ -1,7 +1,5 @@
 # mern project - car parts seller
 
-
-
 ### Quick Start
 
 download following software:

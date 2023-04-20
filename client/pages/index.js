@@ -10,11 +10,11 @@ export default function Home() {
       <div>
         <Navigation/>
       </div>
-      <div>
+      <div className="flex justify-center py-8 home-input-field-area">
         {/* home-input-field-area */}
 
-        <div className="flex justify-center home-input-field-area">
-          <div className="bg-slate-800 home-input-field">
+        <div className="w-6/12 ">
+          <div className="bg-sky-800 py-6 home-input-field">
             <form className="px-6 ">
               <div className="space-y-12 ">
                 <div className="border-b border-gray-900/10 pb-12">
