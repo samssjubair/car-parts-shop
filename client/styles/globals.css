@@ -49,8 +49,10 @@ body {
 }
 
 .dropdown {
-  background-color: white;
-  color: black;
+  background-color: #374151;
+  padding: 0 8px;
+  color: white;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   border: 1px solid gray;
