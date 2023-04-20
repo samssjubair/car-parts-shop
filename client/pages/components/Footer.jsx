@@ -1,9 +1,14 @@
 import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <div>
-      <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
+      <div className="relative isolate overflow-hidden bg-gray-900 pt-16 pb-4">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
@@ -64,12 +69,38 @@ const Footer = () => {
           }}
         />
       </div>
+      <div className='mt-20'><hr/></div>
+      <div className='flex justify-between mt-4'>
+        <div><p className='text-white'>© 2023 carpartz.ae All rights reserved.</p></div>
+        <div className='flex'>
+        <Link
+          href="#"
+          className="footer-icon-menu"
+          >
+          <FaFacebookSquare className="footer-icon"/>
+        </Link>
+        <Link
+          href="#"
+          className="footer-icon-menu"
+          >
+          <FaLinkedin className="footer-icon"/>
+        </Link>
+        <Link
+          href="#"
+          className="footer-icon-menu"
+          >
+          <FaInstagramSquare className="footer-icon"/>
+        </Link>
+        <Link
+          href="#"
+          className="footer-icon-menu"
+          >
+          <FaTwitterSquare className="footer-icon"/>
+        </Link>
+        </div>
+      </div>
     </div>
 
-    
-      <div>
-
-      </div>
     </div>
   )
 }

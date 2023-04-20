@@ -33,3 +33,17 @@ body {
   height: 700px;
   border-radius: 5px;
 }
+
+.slider-img{
+  width: 1200px;
+  height: 500px;
+}
+
+.footer-icon-menu{
+  margin-right: 5px;
+}
+.footer-icon{
+  color: #fff;
+  width: 30px;
+  height: 30px;
+}

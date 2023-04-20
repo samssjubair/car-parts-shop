@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const CarFormDocuments = () => {
-    const [car, setCar] = useState([]);
+    const [cars, setCars] = useState([]);
 
     const url = 'https://car-data.p.rapidapi.com/cars?limit=10&page=0';
 
@@ -17,16 +17,27 @@ const CarFormDocuments = () => {
 
         fetch(url, options)
         .then( res => res.json())
-        .then( data => console.log(data))
+        .then( data => setCars(data))
         .catch(err => {
-            console.log(err)
+          console.log(err)
         })
     }, []);
 
   return (
     <div>
-      <div className="flex justify-center home-input-field-area">
-          <div className="bg-slate-800 home-input-field">
+
+      <div>
+        {
+          cars.map((car) =>(
+            <div>
+              <h3>{car.model}</h3>
+            </div>
+          ))
+        }
+      </div>
+      
+      <div className="flex justify-center home-input-field-area my-8">
+          <div className="bg-gray-900 home-input-field">
             <form className="px-6 ">
               <div className="space-y-12 ">
                 <div className="border-b border-gray-900/10 pb-12">
@@ -43,7 +54,7 @@ const CarFormDocuments = () => {
                         htmlFor="first-name"
                         className="block text-sm font-medium leading-6 text-white"
                       >
-                        First name
+                        Your Name
                       </label>
                       <div className="mt-2">
                         <input
@@ -61,14 +72,14 @@ const CarFormDocuments = () => {
                         htmlFor="last-name"
                         className="block text-sm font-medium leading-6 text-white"
                       >
-                        Last name
+                        Your Email
                       </label>
                       <div className="mt-2">
                         <input
-                          type="text"
-                          name="last-name"
-                          id="last-name"
-                          autoComplete="family-name"
+                          id="email"
+                          name="email"
+                          type="email"
+                          autoComplete="email"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -79,14 +90,14 @@ const CarFormDocuments = () => {
                         htmlFor="email"
                         className="block text-sm font-medium leading-6 text-white"
                       >
-                        Email address
+                        Your address
                       </label>
                       <div className="mt-2">
                         <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          autoComplete="email"
+                          type="text"
+                          name="your-address"
+                          id="your-address"
+                          autoComplete="addres"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -210,3 +221,5 @@ const CarFormDocuments = () => {
 }
 
 export default CarFormDocuments
+
+
