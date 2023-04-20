@@ -1,39 +1,48 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+// import './CarFormDocuments.css';
+const axios = require("axios");
 
 const CarFormDocuments = () => {
-    const [cars, setCars] = useState([]);
+    const [allBrand, setAllBrand] = useState([]);
+    const [brand, setBrand] = useState("");
 
-    const url = 'https://car-data.p.rapidapi.com/cars?limit=10&page=0';
+    const onBrandChange = (event) => {
+      setBrand(event.target.value);
+    };
+
+    const url = 'https://car-data.p.rapidapi.com/makes';
 
     useEffect(() => {
-        const options = {
-            method: 'GET',
-            headers: {
-              'X-RapidAPI-Key': '04d9b0852emshea0815ccd1d70f8p11dc8fjsne6687c7fc606',
-              'X-RapidAPI-Host': 'car-data.p.rapidapi.com'
-            }
-        };
+      
 
-
-        fetch(url, options)
-        .then( res => res.json())
-        .then( data => setCars(data))
-        .catch(err => {
-          console.log(err)
-        })
+      const options = {
+        method: 'GET',
+        url: 'https://car-data.p.rapidapi.com/cars/makes',
+        params: {limit: '10', page: '0'},
+        headers: {
+          'X-RapidAPI-Key': '8a23d0a514mshe967b025d67bacap17893cjsna0dd77ac4153',
+          'X-RapidAPI-Host': 'car-data.p.rapidapi.com'
+        }
+      };
+      
+      axios.request(options).then(function (response) {
+        setAllBrand(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      });
     }, []);
 
   return (
     <div>
 
       <div>
-        {
+        {/* {
           cars.map((car) =>(
             <div>
               <h3>{car.model}</h3>
             </div>
           ))
-        }
+        } */}
       </div>
       
       <div className="flex justify-center home-input-field-area my-8">
@@ -54,17 +63,42 @@ const CarFormDocuments = () => {
                         htmlFor="first-name"
                         className="block text-sm font-medium leading-6 text-white"
                       >
-                        Your Name
+                        Brand Name
                       </label>
                       <div className="mt-2">
                         <input
                           type="text"
                           name="first-name"
                           id="first-name"
+                          value={brand} 
+                          onChange={onBrandChange}
                           autoComplete="given-name"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
+                      <div className="dropdown">
+                      {allBrand
+                        .filter((item) => {
+                          const searchTerm = brand.toLowerCase();
+                          const fullName = item.toLowerCase();
+
+                          return (
+                            searchTerm &&
+                            fullName.startsWith(searchTerm) &&
+                            fullName !== searchTerm
+                          );
+                        })
+                        .slice(0, 10)
+                        .map((item,index) => (
+                          <div
+                            onClick={() => setBrand(item)}
+                            className="dropdown-row"
+                            key={index}
+                          >
+                            {item}
+                          </div>
+                        ))}
+                    </div>
                     </div>
 
                     <div className="sm:col-span-3">
