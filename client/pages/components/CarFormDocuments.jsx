@@ -25,17 +25,6 @@ const CarFormDocuments = () => {
 
   return (
     <div>
-
-      <div>
-        {
-          cars.map((car) =>(
-            <div>
-              <h3>{car.model}</h3>
-            </div>
-          ))
-        }
-      </div>
-      
       <div className="flex justify-center home-input-field-area my-8">
           <div className="bg-gray-900 home-input-field">
             <form className="px-6 ">
