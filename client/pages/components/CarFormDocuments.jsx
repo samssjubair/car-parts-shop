@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
-// import './CarFormDocuments.css';
 const axios = require("axios");
 
 const CarFormDocuments = () => {
-    const [allBrand, setAllBrand] = useState([]);
-    const [brand, setBrand] = useState("");
-
-    const onBrandChange = (event) => {
-      setBrand(event.target.value);
-    };
-
-    const url = 'https://car-data.p.rapidapi.com/makes';
-
-    useEffect(() => {
-      
-
+  const [allBrand, setAllBrand] = useState([]);
+  const [brand, setBrand] = useState("");
+  const onBrandChange = (event) => {
+    setBrand(event.target.value);
+  };
+  useEffect(() => {
       const options = {
         method: 'GET',
         url: 'https://car-data.p.rapidapi.com/cars/makes',
-        params: {limit: '10', page: '0'},
         headers: {
           'X-RapidAPI-Key': '8a23d0a514mshe967b025d67bacap17893cjsna0dd77ac4153',
           'X-RapidAPI-Host': 'car-data.p.rapidapi.com'
@@ -32,55 +24,133 @@ const CarFormDocuments = () => {
       });
     }, []);
 
+    const [allYear, setAllYear] = useState([]);
+    const [allModel, setAllModel] = useState([]);
+    const [year, setYear] = useState("");
+    const [model, setModel] = useState("");
+
+
+    const onYearChange = (event) => {
+      setYear(event.target.value);
+    };
+    const onModelChange = (event) => {
+      setModel(event.target.value);
+    };
+
+    useEffect(() => {
+    const options = {
+      method: 'GET',
+      url: `https://car-api2.p.rapidapi.com/api/models?year=${year}&make=${brand}`,
+      params: {sort: 'id', direction: 'asc', verbose: 'yes'},
+      headers: {
+        'X-RapidAPI-Key': '8a23d0a514mshe967b025d67bacap17893cjsna0dd77ac4153',
+        'X-RapidAPI-Host': 'car-api2.p.rapidapi.com'
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      setAllModel(response.data.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  },[brand,year]);
+
+  const allModelName= allModel.map((item) => {
+    return item.name;
+  });
+  // console.log(allModelName);
+
+  useEffect(() => {
+    const options = {
+      method: 'GET',
+      url: 'https://car-data.p.rapidapi.com/cars/years',
+      headers: {
+        'X-RapidAPI-Key': '04d9b0852emshea0815ccd1d70f8p11dc8fjsne6687c7fc606',
+        'X-RapidAPI-Host': 'car-data.p.rapidapi.com'
+      }
+    };
+    axios.request(options).then(function (response) {
+      setAllYear(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, []);
+
   return (
     <div>
-
-      <div>
-        {/* {
-          cars.map((car) =>(
-            <div>
-              <h3>{car.model}</h3>
-            </div>
-          ))
-        } */}
-      </div>
-      
       <div className="flex justify-center home-input-field-area my-8">
           <div className="bg-gray-900 home-input-field">
             <form className="px-6 ">
               <div className="space-y-12 ">
                 <div className="border-b border-gray-900/10 pb-12">
-                  <h2 className="text-base font-semibold leading-7 text-white">
-                    Car Information
-                  </h2>
-                  <p className="mt-1 text-sm leading-6 text-white">
-                    Use a permanent address where you can receive mail.
-                  </p>
 
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="sm:col-span-3">
+                  <label
+                    htmlFor="first-name"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Brand Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      value={brand} 
+                      onChange={onBrandChange}
+                      autoComplete="given-name"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                  <div className="dropdown">
+                  {allBrand
+                    .filter((item) => {
+                      const searchTerm = brand.toLowerCase();
+                      const fullName = item.toLowerCase();
+
+                      return (
+                        searchTerm &&
+                        fullName.startsWith(searchTerm) &&
+                        fullName !== searchTerm
+                      );
+                    })
+                    .slice(0, 10)
+                    .map((item,index) => (
+                      <div
+                        onClick={() => setBrand(item)}
+                        className="dropdown-row"
+                        key={index}
+                      >
+                        {item}
+                      </div>
+                    ))}
+                </div>
+                </div>
+
                     <div className="sm:col-span-3">
                       <label
-                        htmlFor="first-name"
+                        htmlFor="last-name"
                         className="block text-sm font-medium leading-6 text-white"
                       >
-                        Brand Name
+                        Year
                       </label>
                       <div className="mt-2">
                         <input
-                          type="text"
-                          name="first-name"
-                          id="first-name"
-                          value={brand} 
-                          onChange={onBrandChange}
-                          autoComplete="given-name"
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={year} 
+                          onChange={onYearChange}
+                          autoComplete="email"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                       <div className="dropdown">
-                      {allBrand
-                        .filter((item) => {
-                          const searchTerm = brand.toLowerCase();
-                          const fullName = item.toLowerCase();
+                      {allYear.filter((item) => {
+                          const searchTerm = year.toString().toLowerCase();
+                          const fullName = item.toString().toLowerCase();
+                          // console.log(searchTerm,fullName)
 
                           return (
                             searchTerm &&
@@ -88,34 +158,16 @@ const CarFormDocuments = () => {
                             fullName !== searchTerm
                           );
                         })
-                        .slice(0, 10)
+                        .slice(0, 5)
                         .map((item,index) => (
                           <div
-                            onClick={() => setBrand(item)}
+                            onClick={() => setYear(item)}
                             className="dropdown-row"
                             key={index}
                           >
                             {item}
                           </div>
                         ))}
-                    </div>
-                    </div>
-
-                    <div className="sm:col-span-3">
-                      <label
-                        htmlFor="last-name"
-                        className="block text-sm font-medium leading-6 text-white"
-                      >
-                        Your Email
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          autoComplete="email"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        />
                       </div>
                     </div>
 
@@ -124,16 +176,41 @@ const CarFormDocuments = () => {
                         htmlFor="email"
                         className="block text-sm font-medium leading-6 text-white"
                       >
-                        Your address
+                        Car Model
                       </label>
                       <div className="mt-2">
                         <input
                           type="text"
                           name="your-address"
                           id="your-address"
-                          autoComplete="addres"
+                          value={model} 
+                          onChange={onModelChange}
+                          autoComplete="address"
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
+                      </div>
+                      <div className="dropdown">
+                      {allModelName.filter((item) => {
+                          const searchTerm = model.toLowerCase();
+                          const fullName = item.toLowerCase();
+                          // console.log(searchTerm,fullName)
+
+                          return (
+                            searchTerm &&
+                            fullName.startsWith(searchTerm) &&
+                            fullName !== searchTerm
+                          );
+                        })
+                        .slice(0, 5)
+                        .map((item,index) => (
+                          <div
+                            onClick={() => setModel(item)}
+                            className="dropdown-row"
+                            key={index}
+                          >
+                            {item}
+                          </div>
+                        ))}
                       </div>
                     </div>
 
