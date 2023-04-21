@@ -47,10 +47,10 @@ const Navigation = () => {
                   Home
                 </Link>
                 <Link
-                  href="#"
+                  href="about/aboutUs"
                   className="text-sm font-semibold leading-6 text-gray-900"
                 >
-                  Marketplace
+                  About us
                 </Link>
                 <Link
                   href="#"
