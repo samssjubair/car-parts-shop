@@ -25,6 +25,11 @@ const entrySchema=mongoose.Schema({
         required: true,
         trim: true
     },
+    quantity: {
+        type: Number,
+        required: true,
+        min: [1, "Quantity must be more than 1"]
+    },
     email: {
         type: String,
         validate: [validator.isEmail, "Please provide a valid email"],
