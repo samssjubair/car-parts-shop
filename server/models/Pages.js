@@ -4,12 +4,14 @@ const pagesSchema=mongoose.Schema({
     route: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     title: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     content: {
         type: String,
