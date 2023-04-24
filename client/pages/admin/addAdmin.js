@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+
 
 const addAdmin = () => {
     const [adminEmail, setAdminEmail] = useState("");
@@ -7,7 +9,7 @@ const addAdmin = () => {
         e.preventDefault();
         try {
         const response = await axios.post(
-            "http://localhost:3000/api/v1/admin/",
+            "http://localhost:4800/api/v1/admin/",
             JSON.stringify({ email: adminEmail }),
             {
             headers: {
@@ -16,6 +18,8 @@ const addAdmin = () => {
             }
         );
         console.log(response);
+        setAdminEmail("");
+        alert("Admin added successfully");
         } catch (error) {
         console.error(error);
         }
@@ -38,6 +42,7 @@ const addAdmin = () => {
                 type="email"
                 id="email"
                 name="email"
+                value={adminEmail}
                 placeholder="Enter email"
                 className="w-full border border-gray-400 text-black p-2 rounded-lg"
                 required
