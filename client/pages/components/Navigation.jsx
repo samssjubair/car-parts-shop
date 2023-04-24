@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from 'next/link'
 import { Dialog, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PhoneIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
-import Link from "next/link";
+// import Link from "next/link";
+import axios from "axios";
 
 const callsToAction = [
     { name: "Watch demo", href: "#", icon: PlayCircleIcon },
@@ -16,6 +18,19 @@ function classNames(...classes) {
 
 const Navigation = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [allAdminCreatedRoute, setAllAdminCreatedRoute] = useState([]);
+    useEffect(() => {
+        axios.get("http://localhost:4800/api/v1/pages").then((res) => {
+            setAllAdminCreatedRoute(res.data.data);
+        });
+    }, []);
+
+    const allRoutes= allAdminCreatedRoute.map((route) => {
+      return route.route
+    })
+    // console.log(allRoutes)
+  
+
   return (
     <div>
       {/* Navigation */}
@@ -40,33 +55,36 @@ const Navigation = () => {
                 </button>
               </div>
               <Popover.Group className="hidden lg:flex lg:gap-x-12">
-                <Link
+              <Link
                   href="/"
                   className="text-sm font-semibold leading-6 text-gray-900"
                 >
                   Home
                 </Link>
-                <Link
-                  href="#"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Marketplace
-                </Link>
-                <Link
-                  href="#"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Company
-                </Link>
+                {
+                  allRoutes.map((route,ind) => {
+                    return (
+                      <Link
+                        key={ind}
+                        href= {`/${route}`}
+                        
+                        className="text-sm capitalize font-semibold leading-6 text-gray-900"
+                      >
+                        {route}
+                      </Link>
+                    )
+                  })
+                }
+                
               </Popover.Group>
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <Link
                   href="user/login"
                   className="text-sm font-semibold leading-6 text-gray-900"
                 >
                   Log in <span aria-hidden="true">&rarr;</span>
                 </Link>
-              </div>
+              </div> */}
             </nav>
             <Dialog
               as="div"

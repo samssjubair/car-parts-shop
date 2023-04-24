@@ -1,7 +1,8 @@
 const express= require('express');
-const { savePages } = require('../controller/page.controller');
+const { savePages, getPage } = require('../controller/page.controller');
 const router=express.Router();
 
-router.route('/').post(savePages);
+router.route('/').post(savePages).get(getPage);
+// router.route('/:page').get(getPageByRoute);
 
 module.exports = router;

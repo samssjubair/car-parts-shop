@@ -19,7 +19,8 @@ function AddPages() {
         "http://localhost:4800/api/v1/pages",
         data
       );
-      console.log(response.data);
+    //   console.log(response.data);
+    alert("Page added successfully");
     } catch (error) {
       console.log(error);
     }

@@ -18,7 +18,6 @@ export default function Home() {
       <div>
         <CarFromDocuments />
       </div>
-
       <div>
         <Footer />
       </div>
