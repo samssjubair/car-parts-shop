@@ -19,6 +19,17 @@ function classNames(...classes) {
 const Navigation = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [allAdminCreatedRoute, setAllAdminCreatedRoute] = useState([]);
+    const [logoUrl, setLogoUrl] = useState('');
+
+    useEffect(() => {
+      fetch('http://localhost:4800/api/v1/logo')
+        .then(response => response.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          setLogoUrl(url);
+        });
+    }, []);
+
     useEffect(() => {
         axios.get("http://localhost:4800/api/v1/pages").then((res) => {
             setAllAdminCreatedRoute(res.data.data);
@@ -41,7 +52,8 @@ const Navigation = () => {
             >
               <div className="flex lg:flex-1">
                 <Link href="/" className="-m-1.5 p-1.5">
-                  <h1 className="text-gray-900">CarPartz</h1>
+                  {/* <h1 className="text-gray-900">CarPartz</h1> */}
+                  <img className="h-10" src={logoUrl} alt="Logo" />
                 </Link>
               </div>
               <div className="flex lg:hidden">
