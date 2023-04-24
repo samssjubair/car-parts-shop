@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const entryRouter=  require('./routes/entries.route');
 const pagesRouter=  require('./routes/pages.route');
 const logoRouter=  require('./routes/logo.route');
+const adminRouter=  require('./routes/admin.route');
 
 app.use(express.json());
 app.use(cors());
@@ -20,6 +21,7 @@ app.get('/api/v1/logo/', (req, res) => {
 app.use('/api/v1/entries',entryRouter);
 app.use('/api/v1/pages',pagesRouter);
 app.use('/api/v1/logo',logoRouter);
+app.use('/api/v1/admin',adminRouter);
 
 
 module.exports =app;

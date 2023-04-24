@@ -3,23 +3,23 @@ import React, { useState } from 'react';
 const addAdmin = () => {
     const [adminEmail, setAdminEmail] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "/api/v1/admin/email",
-        JSON.stringify({ email: adminEmail }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+        const response = await axios.post(
+            "http://localhost:3000/api/v1/admin/",
+            JSON.stringify({ email: adminEmail }),
+            {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            }
+        );
+        console.log(response);
+        } catch (error) {
+        console.error(error);
         }
-      );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
     return (
         <div>
             <header class="bg-white shadow">
@@ -39,7 +39,7 @@ const addAdmin = () => {
                 id="email"
                 name="email"
                 placeholder="Enter email"
-                className="w-full border border-gray-400 p-2 rounded-lg"
+                className="w-full border border-gray-400 text-black p-2 rounded-lg"
                 required
                 onChange={(e) => setAdminEmail(e.target.value)}
                 />
