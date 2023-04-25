@@ -25,6 +25,14 @@ const entrySchema=mongoose.Schema({
         required: true,
         trim: true
     },
+    type:{
+        type: String,
+        required: true,
+        enum: {
+            values: ["Mechanical", "Electrical", "AC", "Extras"],
+            message: "Please select a valid type"
+        }
+    },
     quantity: {
         type: Number,
         required: true,
