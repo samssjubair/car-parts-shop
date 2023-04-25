@@ -5,3 +5,9 @@ module.exports.saveAdminService = async (data) => {
     const admin = await Admin.create(data);
     return admin;
 }
+
+module.exports.getAllAdminsService = async () => {
+    const admins = await Admin.find();
+    return admins;
+}
+

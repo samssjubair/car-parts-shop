@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import { signOut } from 'next-auth/react';
 
 const addAdmin = () => {
     const [adminEmail, setAdminEmail] = useState("");
+    const [admins, setAdmins] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,6 +30,17 @@ const addAdmin = () => {
         console.error(error);
         }
     };
+    
+    useEffect(() => {
+        axios.get("http://localhost:4800/api/v1/admin/").then((res) => {
+        setAdmins(res.data.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        }
+        );
+    }, []);
+    
     return (
         <div>
             <header className="bg-white shadow">
@@ -40,7 +52,8 @@ const addAdmin = () => {
             </div>
             </header>
 
-            <div className="flex justify-center items-center h-screen bg-black">
+
+            <div className="flex justify-center  mt-20 bg-black">
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">Add Admin Email</h1>
                 <div className="mb-4">
@@ -64,6 +77,43 @@ const addAdmin = () => {
                 </button>
                 </div>
             </form>
+            </div>
+
+            <div className="shadow w-1/2 mt-20 mx-auto overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full  divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+                <tr>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Admin List
+                </th>
+
+                {/* <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Action
+                </th> */}
+                
+                </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+                {
+                    admins.map(admin =>
+                        <tr>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm font-medium text-gray-900">
+                            {admin.email}
+                            </div>
+                        </td>
+                        {/* <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm font-medium text-gray-900">
+                            {partEntry.brandName}
+                            </div>
+                        </td> */}
+                        
+                    </tr>
+                    )
+                }
+                
+            </tbody>
+            </table>
             </div>
 
         </div>
