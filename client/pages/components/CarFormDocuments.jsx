@@ -48,18 +48,18 @@ const CarFormDocuments = () => {
       url: `https://car-api2.p.rapidapi.com/api/models?year=2020&make=${brand}`,
       params: {sort: 'id', direction: 'asc', verbose: 'yes'},
       headers: {
-        'X-RapidAPI-Key': '8a23d0a514mshe967b025d67bacap17893cjsna0dd77ac4153',
+        // 'content-type': 'application/octet-stream',
+        'X-RapidAPI-Key': 'cca3027ed2mshab6215589fddd89p1d62f6jsn5d3af0d08feb',
         'X-RapidAPI-Host': 'car-api2.p.rapidapi.com'
       }
     };
-    
     axios.request(options).then(function (response) {
       console.log(response.data)
       setAllModel(response.data.data);
     }).catch(function (error) {
       console.error(error);
     });
-  },[brand,year]);
+  },[brand]);
 
   const allModelName= allModel.map((item) => {
     return item.name;
@@ -143,15 +143,15 @@ const CarFormDocuments = () => {
   return (
     <div>
       <div className="flex justify-center home-input-field-area my-8">
-      <div class="w-3/4 bg-white rounded-lg shadow dark:border md:mt-0  xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="w-11/12 bg-white rounded-lg shadow dark:border md:mt-0  xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
         <form onSubmit={handleSubmit} class="space-y-4 md:space-y-6 lg:space-y-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" action="#">
 
           
 
-      <div  className="md:mt-6 lg:mt-8">
-        <label for="brand-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand Name</label>
+      <div  className="md:mt-6 lg:mt-8 dd-parent">
+        <label for="brand-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
         <input autocomplete="off" value={brand} onFocus={()=>setBrandSelected(true)} onChange={onBrandChange} type="text" name="brand-name" id="brand-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter brand name" required=""/>
         <div className={`dropdown ${brandSelected? '':'hidden'}`}>
           {allBrand
@@ -170,7 +170,7 @@ const CarFormDocuments = () => {
                 fullName !== searchTerm
               );
             })
-            .slice(0, 10)
+            .slice(0, 5)
             .map((item,index) => (
               <div
                 onClick={() => setBrand(item)}
@@ -183,7 +183,7 @@ const CarFormDocuments = () => {
         </div>
       </div>
       
-      <div>
+      <div className="dd-parent">
         <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
         <input autocomplete="off" value={year} onFocus={()=>setYearSelected(true)}  onChange={onYearChange} type="number" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter year" required=""/>
         <div className={`dropdown ${yearSelected? '':'hidden'}`} >
@@ -215,8 +215,8 @@ const CarFormDocuments = () => {
           ))}
         </div>
       </div>
-      <div >
-        <label for="model-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Model Name</label>
+      <div className="dd-parent">
+        <label for="model-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Model</label>
         <input autocomplete="off" value={model} onFocus={()=>setModelSelected(true)} onChange={onModelChange} type="text"  name="model-name" id="model-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter model name" required=""/>
         <div className={`dropdown ${modelSelected? '':'hidden'}`}>
         {allModelName.filter((item) => {
@@ -248,7 +248,7 @@ const CarFormDocuments = () => {
         </div>
       </div>
       <div >
-        <label for="parts-required" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parts Required</label>
+        <label for="parts-required" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Part Required</label>
           <input value={requiredParts} onChange={(e)=>setRequiredParts(e.target.value)} type="text" name="parts-required" id="parts-required" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter parts required" required=""/>
       </div>
 
