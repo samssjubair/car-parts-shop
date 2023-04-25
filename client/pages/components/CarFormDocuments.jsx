@@ -4,6 +4,9 @@ const axios = require("axios");
 const CarFormDocuments = () => {
   const [allBrand, setAllBrand] = useState([]);
   const [brand, setBrand] = useState("");
+  const [brandSelected, setBrandSelected] = useState(false);
+  const [modelSelected, setModelSelected] = useState(false);
+  const [yearSelected, setYearSelected] = useState(false);
   const [partType, setPartType] = useState("");
   const onBrandChange = (event) => {
     setBrand(event.target.value);
@@ -41,7 +44,8 @@ const CarFormDocuments = () => {
     useEffect(() => {
     const options = {
       method: 'GET',
-      url: `https://car-api2.p.rapidapi.com/api/models?year=${year}&make=${brand}`,
+      // url: `https://car-api2.p.rapidapi.com/api/models?year=${year}&make=${brand}`,
+      url: `https://car-api2.p.rapidapi.com/api/models?year=2020&make=${brand}`,
       params: {sort: 'id', direction: 'asc', verbose: 'yes'},
       headers: {
         'X-RapidAPI-Key': '8a23d0a514mshe967b025d67bacap17893cjsna0dd77ac4153',
@@ -50,6 +54,7 @@ const CarFormDocuments = () => {
     };
     
     axios.request(options).then(function (response) {
+      console.log(response.data)
       setAllModel(response.data.data);
     }).catch(function (error) {
       console.error(error);
@@ -125,6 +130,9 @@ const CarFormDocuments = () => {
       setEmail("");
       setMobile("");
       setAddress("");
+      setBrandSelected(false);
+      setModelSelected(false);
+      setYearSelected(false);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -142,16 +150,21 @@ const CarFormDocuments = () => {
 
           
 
-      <div className="md:mt-6 lg:mt-8">
+      <div  className="md:mt-6 lg:mt-8">
         <label for="brand-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand Name</label>
-        <input value={brand} onChange={onBrandChange} type="text" name="brand-name" id="brand-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter brand name" required=""/>
-        <div className="dropdown">
+        <input autocomplete="off" value={brand} onFocus={()=>setBrandSelected(true)} onChange={onBrandChange} type="text" name="brand-name" id="brand-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter brand name" required=""/>
+        <div className={`dropdown ${brandSelected? '':'hidden'}`}>
           {allBrand
             .filter((item) => {
               const searchTerm = brand.toLowerCase();
               const fullName = item.toLowerCase();
 
               return (
+                brandSelected ? 
+                // searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm 
+                :
                 searchTerm &&
                 fullName.startsWith(searchTerm) &&
                 fullName !== searchTerm
@@ -172,17 +185,22 @@ const CarFormDocuments = () => {
       
       <div>
         <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
-        <input value={year} onChange={onYearChange} type="number" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter year" required=""/>
-        <div className="dropdown">
+        <input autocomplete="off" value={year} onFocus={()=>setYearSelected(true)}  onChange={onYearChange} type="number" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter year" required=""/>
+        <div className={`dropdown ${yearSelected? '':'hidden'}`} >
         {allYear.filter((item) => {
             const searchTerm = year.toString().toLowerCase();
             const fullName = item.toString().toLowerCase();
             // console.log(searchTerm,fullName)
 
             return (
-              searchTerm &&
-              fullName.startsWith(searchTerm) &&
-              fullName !== searchTerm
+              yearSelected ? 
+                // searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm 
+                :
+                searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm
             );
           })
           .slice(0, 5)
@@ -199,17 +217,22 @@ const CarFormDocuments = () => {
       </div>
       <div >
         <label for="model-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Model Name</label>
-        <input value={model} onChange={onModelChange} type="text"  name="model-name" id="model-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter model name" required=""/>
-        <div className="dropdown">
+        <input autocomplete="off" value={model} onFocus={()=>setModelSelected(true)} onChange={onModelChange} type="text"  name="model-name" id="model-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter model name" required=""/>
+        <div className={`dropdown ${modelSelected? '':'hidden'}`}>
         {allModelName.filter((item) => {
             const searchTerm = model.toLowerCase();
             const fullName = item.toLowerCase();
             // console.log(searchTerm,fullName)
 
             return (
-              searchTerm &&
-              fullName.startsWith(searchTerm) &&
-              fullName !== searchTerm
+              modelSelected ? 
+                // searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm 
+                :
+                searchTerm &&
+                fullName.startsWith(searchTerm) &&
+                fullName !== searchTerm
             );
           })
           .slice(0, 5)
@@ -259,10 +282,10 @@ const CarFormDocuments = () => {
       </div>
       <div>
           <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-          <textarea value={address} onChange={(e)=>setAddress(e.target.value)} name="address" id="address" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123 Main St, Anytown USA" required=""></textarea>
+          <input value={address} onChange={(e)=>setAddress(e.target.value)} name="address" id="address" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123 Main St, Anytown USA" required=""></input>
       </div>
-      <div className="col-span-4  flex justify-center">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Submit</button>
+      <div>
+        <button type="submit" class="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-7">Submit</button>
       </div>
       </form>
       </div>
