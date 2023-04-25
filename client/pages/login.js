@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 export default function Login() {
     const router =  useRouter()
     const [authState, setAuthState] = useState({
-        username: '',
+        email: '',
         password: ''
     })
     const [pageState, setPageState] = useState({
@@ -22,7 +22,7 @@ export default function Login() {
 
     const simplifyError = (error) => {
         const errorMap = {
-            "CredentialsSignin": "Invalid username or password"
+            "CredentialsSignin": "Invalid email or password"
         }
         return errorMap[error] ?? "Unknown error occurred"
     }
@@ -59,11 +59,11 @@ export default function Login() {
         </header>
         <div class="flex flex-col h-screen justify-center items-center bg-black-900">
             <h1 class="text-4xl font-bold mb-8">Admin Login</h1>
-            <div class="bg-white shadow-lg rounded-lg p-8">
-                {/* {
-                    pageState.error !== '' && alert(`${simplifyError(pageState.error)}`)
-                } */}
-                <input class="w-full px-4 py-2 border rounded-lg text-black mb-4" onChange={handleFieldChange} value={authState.username} placeholder="Username" id='username' />
+            <div class="bg-white shadow-lg rounded-lg w-1/3 p-8">
+                {
+                    pageState.error !== '' && <span className='text-red-800'>{(simplifyError(pageState.error))}</span>
+                }
+                <input class="w-full px-4 py-2 border rounded-lg text-black mb-4" onChange={handleFieldChange} value={authState.email} placeholder="Email" id='email' type='email' />
                 <input class="w-full px-4 py-2 border rounded-lg text-black mb-4" onChange={handleFieldChange} value={authState.password} placeholder="Password" type='password' id='password' />
                 <button class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg disabled:opacity-50" disabled={pageState.processing} onClick={handleAuth}>Login</button>
             </div>

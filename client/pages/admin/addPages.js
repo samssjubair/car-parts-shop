@@ -3,6 +3,7 @@ import axios from "axios";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 function AddPages() {
   const [pageRoute, setPageRoute] = useState("");

@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 function LogoUpload() {
   const [logoFile, setLogoFile] = useState(null);

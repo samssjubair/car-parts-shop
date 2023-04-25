@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 
 const addAdmin = () => {
@@ -38,13 +39,11 @@ const addAdmin = () => {
                 <button className='text-black' onClick={_=>signOut()}>Log Out</button>
             </div>
             </header>
+
             <div className="flex justify-center items-center h-screen bg-black">
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">Add Admin Email</h1>
                 <div className="mb-4">
-                {/* <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
-                    Email
-                </label> */}
                 <input
                     type="email"
                     id="email"
