@@ -1,5 +1,8 @@
+import { unstable_getServerSession } from 'next-auth';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { authOptions } from '../../pages/api/auth/[...nextauth]';
 
 const dashboard = () => {
     const [partEntries, setPartEntries] = useState([]);
@@ -8,16 +11,18 @@ const dashboard = () => {
         .then(res => res.json())
         .then(data => setPartEntries(data.data));
     },[]);
-    console.log(partEntries)
+    // console.log(partEntries)
     return (
         <div>
           
         <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between">
             <h1 className="text-3xl font-bold text-gray-900">
             Admin Dashboard
             </h1>
+            <button className='text-black' onClick={_=>signOut()}>Log Out</button>
         </div>
+        
         </header>
 
 
@@ -137,3 +142,22 @@ const dashboard = () => {
 };
 
 export default dashboard;
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions)
+    if(!session) {
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false
+        }
+      }
+    }
+  
+    return {
+      props: {
+  
+      }
+    }
+  }
+  

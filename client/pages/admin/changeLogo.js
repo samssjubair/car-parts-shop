@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import { authOptions } from '../../pages/api/auth/[...nextauth]';
+import { unstable_getServerSession } from 'next-auth';
+import Link from 'next/link';
 
 function LogoUpload() {
   const [logoFile, setLogoFile] = useState(null);
@@ -25,10 +28,13 @@ function LogoUpload() {
   return (
     <div>
         <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between">
             <h1 class="text-3xl font-bold text-gray-900">
-            Admin Dashboard
+            {/* <h1 className="text-3xl font-bold text-gray-900"> */}
+                <Link href="/admin/dashboard">Admin Dashboard</Link>
+            {/* </h1> */}
             </h1>
+            <button className='text-black' onClick={_=>signOut()}>Log Out</button>
         </div>
         </header>
         {/* <Navigation/> */}
@@ -52,3 +58,22 @@ function LogoUpload() {
 }
 
 export default LogoUpload;
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions)
+    if(!session) {
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false
+        }
+      }
+    }
+  
+    return {
+      props: {
+  
+      }
+    }
+  }
+  
