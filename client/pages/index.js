@@ -17,6 +17,10 @@ export default function Home() {
       <div>
         <HomeSlider/>
       </div>
+      <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4 text-gray-300">Find the Right Car Parts From Carpartz</h1>
+        <p class="text-lg mb-8 text-gray-200">Shop our wide selection of high-quality car parts and accessories at affordable prices.</p>
+      </div>
       <div>
         <CarFromDocuments />
       </div>
