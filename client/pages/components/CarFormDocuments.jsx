@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const axios = require("axios");
 
 const CarFormDocuments = () => {
@@ -96,6 +96,10 @@ const CarFormDocuments = () => {
     event.preventDefault();
     // handle form submission logic here
     console.log(event.target[0].defaultValue);
+    if( brand === "" || year === "" || model === "" || requiredParts === "" || partType === "" || quantity === "" || name === "" || email === "" || mobile === "" || address === ""){
+      alert("Please fill all the fields");
+      return;
+    }
     const body={
       brandName: brand,
       year: year,
@@ -135,9 +139,27 @@ const CarFormDocuments = () => {
       setYearSelected(false);
     })
     .catch((error) => {
+      alert(error);
       console.error('Error:', error);
     });
   };
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      console.log(dropdownRef, event.target)
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setBrandSelected(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [dropdownRef]);
 
 
   return (
@@ -153,7 +175,7 @@ const CarFormDocuments = () => {
       <div  className="md:mt-6 lg:mt-8 dd-parent">
         <label for="brand-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
         <input autocomplete="off" value={brand} onFocus={()=>setBrandSelected(true)} onChange={onBrandChange} type="text" name="brand-name" id="brand-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter brand name" required=""/>
-        <div className={`dropdown ${brandSelected? '':'hidden'}`}>
+        <div  className={`dropdown ${brandSelected? '':'hidden'}`}>
           {allBrand
             .filter((item) => {
               const searchTerm = brand.toLowerCase();
@@ -285,7 +307,7 @@ const CarFormDocuments = () => {
           <input value={address} onChange={(e)=>setAddress(e.target.value)} name="address" id="address" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123 Main St, Anytown USA" required=""></input>
       </div>
       <div>
-        <button type="submit" class="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-7">Submit</button>
+        <button type="submit" class="dark:bg-gray-700  hover:bg-gray-900 text-white font-bold py-2 px-4 rounded mt-7">Submit</button>
       </div>
       </form>
       </div>
