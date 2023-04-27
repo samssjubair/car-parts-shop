@@ -8,7 +8,7 @@ export default async function (req, res) {
   const { email, password } = req.body;
 
   // Check in the database
-  // if a user with this username
+  // if a user with this email
   // and password exists
   if (email === "Admin69@gmail.com" && password === "Admin") {
     const token = sign(

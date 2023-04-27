@@ -1,52 +1,52 @@
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 
 
 
 
-const secret = process.env.SECRET;
+// const secret = process.env.SECRET;
 
-export default function middleware(req) {
-    const {cookies} = req;
+// export default function middleware(req) {
+//     const {cookies} = req;
 
-    const jwt = cookies.OursiteJWT;
+//     const jwt = cookies.OursiteJWT;
 
-    const url = req.url;
+//     const url = req.url;
 
-    if(url.includes("/user/login")){
-        if(jwt){
-            try{
-                verify(jwt, secret);
+//     if(url.includes("/user/login")){
+//         if(jwt){
+//             try{
+//                 verify(jwt, secret);
     
-                return NextResponse.redirect("/");
+//                 return NextResponse.redirect("/");
     
     
-            }catch (e){
-                return NextResponse.next();
-            }
-        }
+//             }catch (e){
+//                 return NextResponse.next();
+//             }
+//         }
 
 
         
-    }
+//     }
 
-    if(url.includes("/admin/dashboard")){
-        if(jwt === undefined){
-            return NextResponse.redirect("/user/login");
-        }
-
-
-        try{
-            verify(jwt, secret);
-
-            return NextResponse.next();
+//     if(url.includes("/admin/dashboard")){
+//         if(jwt === undefined){
+//             return NextResponse.redirect("/user/login");
+//         }
 
 
-        }catch (e){
-            return NextResponse.redirect("/user/login");
-        }
-    }
+//         try{
+//             verify(jwt, secret);
+
+//             return NextResponse.next();
+
+
+//         }catch (e){
+//             return NextResponse.redirect("/user/login");
+//         }
+//     }
 
     
 
-    return NextResponse.next();
-}
+//     return NextResponse.next();
+// }
