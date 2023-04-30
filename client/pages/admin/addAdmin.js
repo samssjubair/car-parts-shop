@@ -6,6 +6,7 @@ import { unstable_getServerSession } from "next-auth";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
+import { BiSearch } from "react-icons/bi";
 
 const addAdmin = () => {
   const [adminEmail, setAdminEmail] = useState("");
@@ -44,6 +45,23 @@ const addAdmin = () => {
 
   return (
     <Sidebar>
+      {/* Search bar */}
+      <div className="mt-6">
+        <form>
+          <div className="relative flex items-center text-gray-400 focus-within:text-gray-600">
+            <BiSearch className="w-5 h-5 absolute ml-3" />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              autoComplete="off"
+              aria-label="Search..."
+              className="pr-3 pl-10 w-screen py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none right-2 ring-gray-300 focus:ring-gray-500 bg-gray-100 focus:ring-2"
+            />
+          </div>
+        </form>
+      </div>
+      {/* Search bar end */}
       <div className="flex justify-center  mt-20 bg-black">
         <form
           onSubmit={handleSubmit}

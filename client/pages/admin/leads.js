@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
+import { BiSearch } from "react-icons/bi";
+
 const leads = () => {
   const [partEntries, setPartEntries] = useState([]);
 
@@ -10,28 +12,55 @@ const leads = () => {
   }, []);
   return (
     <Sidebar className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <div className="shadow overflow-hidden border-b border-gray-200 overflow-x-auto sm:rounded-lg">
+      {/* Search bar */}
+      <div className="mt-6">
+        <form>
+          <div className="relative flex items-center text-gray-400 focus-within:text-gray-600">
+            <BiSearch className="w-5 h-5 absolute ml-3" />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              autoComplete="off"
+              aria-label="Search..."
+              className="pr-3 pl-10 w-screen py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none right-2 ring-gray-300 focus:ring-gray-500 bg-gray-100 focus:ring-2"
+            />
+          </div>
+        </form>
+      </div>
+      {/* Search bar end */}
+      <div className="shadow overflow-hidden border-b border-gray-200 overflow-x-auto sm:rounded-lg mt-10 bg-gray-100 h-screen ">
+        <div className=" flex pt-6 pl-4 justify-between">
+          <div>
+            <h1 className="text-xl mb-4">Leads</h1>
+          </div>
+          <div>
+            <button className="leads-btn">
+              Eport
+            </button>
+          </div>
+        </div>
         <table className="w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="">
             <tr>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Request Time
+                ID
               </th>
 
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Brand Name
+                Brand
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Model Name
+                Model
               </th>
               <th
                 scope="col"
@@ -43,20 +72,14 @@ const leads = () => {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Required Parts
-              </th>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Required Parts
+                Parts Required
               </th>
 
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Quantity
+                Condition
               </th>
               <th
                 scope="col"
@@ -70,17 +93,18 @@ const leads = () => {
               >
                 Email
               </th>
-              <th
-                scope="col"
-                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Delivery Address
-              </th>
+
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 Phone
+              </th>
+              <th
+                scope="col"
+                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Status
               </th>
             </tr>
           </thead>
