@@ -11,9 +11,9 @@ import { AiOutlineLogout } from "react-icons/ai";
 const Sidebar = ({children}) => {
   return (
     <div className="flex">
-      <div className="h-screen bg-slate-400 w-44 max-w-7xl px-6">
+      <div className="h-screen w-44 max-w-7xl px-6">
         <div className="">
-          <h3 className="">CarPartz</h3>
+          <h3 className="pt-6">CarPartz</h3>
         </div>
         <div className="mt-32">
           <div className="flex items-center ">
