@@ -17,7 +17,7 @@ function AddPages() {
       title: pageTitle,
       content: pageContent,
     };
-    console.log(data)
+    // console.log(data)
     try {
       const response = await axios.post(
         "http://localhost:4800/api/v1/pages",

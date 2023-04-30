@@ -23,7 +23,7 @@ const addAdmin = () => {
             },
             }
         );
-        console.log(response);
+        // console.log(response);
         setAdminEmail("");
         alert("Admin added successfully");
         } catch (error) {
