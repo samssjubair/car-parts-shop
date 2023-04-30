@@ -5,6 +5,9 @@ import { BiSearch } from "react-icons/bi";
 import { RiHandHeartFill } from "react-icons/ri";
 import { AiOutlineRise } from "react-icons/ai";
 import { FaUsers } from "react-icons/fa";
+import { BiDotsVerticalRounded } from "react-icons/bi";
+import { BiChevronDown } from "react-icons/bi";
+import Image from "next/image";
 
 const dashboard = ({ Children }) => {
   // console.log(partEntries)
@@ -62,10 +65,130 @@ const dashboard = ({ Children }) => {
                 </div>
               </div>
             </div>
+
+            <div className="mt-5">
+              <div>
+                <h3 className="text-slate-950 text-lg">Recent</h3>
+              </div>
+              <div className="">
+                <table className="w-full">
+                  <thead>
+                    <tr>
+                      <th className="py-3 text-left">ID</th>
+                      <th className="py-3 text-left">Name</th>
+                      <th className="py-3 text-left">Dat</th>
+                      <th className="py-3 text-left">Amoun</th>
+                      <th className="py-3 text-left"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="">
+                    <tr className="cursor-pointer">
+                      <td className="py-3 text-left">772</td>
+                      <td className="py-3  text-left">Mackbook</td>
+                      <td className="py-3  text-left">18 June</td>
+                      <td className="py-3  text-left">$1.05</td>
+                      <td className="py-3 text-right">
+                        <BiDotsVerticalRounded />
+                      </td>
+                    </tr>
+                    <tr className="cursor-pointer">
+                      <td className="py-3  text-left">772</td>
+                      <td className="py-3  text-left">Mackbook</td>
+                      <td className="py-3  text-left">18 June</td>
+                      <td className="py-3  text-left">$1.05</td>
+                      <td className="py-3 text-right">
+                        <BiDotsVerticalRounded />
+                      </td>
+                    </tr>
+                    <tr className="cursor-pointer">
+                      <td className="py-3  text-left">772</td>
+                      <td className="py-3  text-left">Mackbook</td>
+                      <td className="py-3  text-left">18 June</td>
+                      <td className="py-3  text-left">$1.05</td>
+                      <td className="py-3 text-right">
+                        <BiDotsVerticalRounded />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <div className="">
-          <h3>Admin</h3>
+          <div className="mt-6 bg-gray-100 rounded-lg">
+            <div className=" px-5 py-10">
+              <div className="flex place-items-center justify-end">
+                <h1 className="mr-2">Admin</h1>
+
+                <Image
+                  src=""
+                  alt=""
+                  className="border-slate-200 rounded-full w-10 h-10 bg-gray-400 py-1.5 px-1.5 mr-1.5"
+                />
+
+                <BiChevronDown />
+              </div>
+
+              <div  className="mt-10">
+                <div className="flex justify-between mb-5">
+                  <div>
+                    <h2>Top Brands</h2>
+                  </div>
+                  <div>
+                    <BiDotsVerticalRounded />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">BMW</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Toyota</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Honda</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Mercedes</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10">
+                <div className="flex justify-between mb-5">
+                  <div>
+                    <h2>Top Location</h2>
+                  </div>
+                  <div>
+                    <BiDotsVerticalRounded />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Dubai</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Abu Dubai</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Ajman</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Sharjah</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Sidebar>
