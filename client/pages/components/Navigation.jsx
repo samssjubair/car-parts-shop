@@ -74,6 +74,9 @@ const Navigation = () => {
                   Home
                 </Link>
                 {
+                  console.log(allRoutes)
+                }
+                {
                   allRoutes.map((route,ind) => {
                     return (
                       <Link

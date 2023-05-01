@@ -1,59 +1,84 @@
 // import { Alert, Button, Grid, TextField } from '@mui/material'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 export default function Login() {
-    const router =  useRouter()
-    const [authState, setAuthState] = useState({
-        email: '',
-        password: ''
+  const router = useRouter();
+  const [authState, setAuthState] = useState({
+    email: "",
+    password: "",
+  });
+  const [pageState, setPageState] = useState({
+    error: "",
+    processing: false,
+  });
+
+  const handleFieldChange = (e) => {
+    setAuthState((old) => ({ ...old, [e.target.id]: e.target.value }));
+  };
+
+  const simplifyError = (error) => {
+    const errorMap = {
+      CredentialsSignin: "Invalid email or password",
+    };
+    return errorMap[error] ?? "Unknown error occurred";
+  };
+
+  const handleAuth = async () => {
+    setPageState((old) => ({ ...old, processing: true, error: "" }));
+    signIn("credentials", {
+      ...authState,
+      redirect: false,
     })
-    const [pageState, setPageState] = useState({
-        error: '',
-        processing: false
-    })
-
-    const handleFieldChange = (e) => {
-        setAuthState(old => ({ ...old, [e.target.id]: e.target.value }))
-    }
-
-    
-
-    const simplifyError = (error) => {
-        const errorMap = {
-            "CredentialsSignin": "Invalid email or password"
+      .then((response) => {
+        console.log(response);
+        if (response.ok) {
+          // Authenticate user
+          router.push("/admin/dashboard");
+        } else {
+          setPageState((old) => ({
+            ...old,
+            processing: false,
+            error: response.error,
+          }));
         }
-        return errorMap[error] ?? "Unknown error occurred"
-    }
+      })
+      .catch((error) => {
+        console.log(error);
+        setPageState((old) => ({
+          ...old,
+          processing: false,
+          error: error.message ?? "Something went wrong!",
+        }));
+      });
+  };
 
-    const handleAuth = async () => {
-        setPageState(old => ({...old, processing: true, error: ''}))
-        signIn('credentials', {
-            ...authState,
-            redirect: false
-        }).then(response => {
-            // console.log(response)
-            if (response.ok) {
-                // Authenticate user
-                router.push("/admin/dashboard")
-            } else {
-                setPageState(old => ({ ...old, processing: false, error: response.error }))
-            }
-        }).catch(error => {
-            // console.log(error)
-            setPageState(old => ({...old, processing: false, error: error.message ?? "Something went wrong!"}))
-        })
-    }
+    // const handleAuth = async () => {
+    //     setPageState(old => ({...old, processing: true, error: ''}))
+    //     signIn('credentials', {
+    //         ...authState,
+    //         redirect: false
+    //     }).then(response => {
+    //         // console.log(response)
+    //         if (response.ok) {
+    //             // Authenticate user
+    //             router.push("/admin/dashboard")
+    //         } else {
+    //             setPageState(old => ({ ...old, processing: false, error: response.error }))
+    //         }
+    //     }).catch(error => {
+    //         // console.log(error)
+    //         setPageState(old => ({...old, processing: false, error: error.message ?? "Something went wrong!"}))
+    //     })
+    // }
 
     return (
     <div>
-        <header className="bg-white shadow">
+      <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-gray-900">
-            Admin Dashboard
-            </h1>
-            {/* <button className='text-black' onClick={_=>signOut()}>Log Out</button> */}
+          <h1 className="text-3xl font-bold text-gray-900">CarPartz</h1>
+          {/* <button className='text-black' onClick={_=>signOut()}>Log Out</button> */}
         </div>
         
         </header>
@@ -68,7 +93,7 @@ export default function Login() {
                 <button className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg disabled:opacity-50" disabled={pageState.processing} onClick={handleAuth}>Login</button>
             </div>
         </div>
-    </div>
-
-    )
+      </div>
+    // </div>
+  );
 }

@@ -1,180 +1,221 @@
-import { unstable_getServerSession } from 'next-auth';
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { authOptions } from '../../pages/api/auth/[...nextauth]';
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
+import Sidebar from "../components/Sidebar";
+import { BiSearch } from "react-icons/bi";
+import { RiHandHeartFill } from "react-icons/ri";
+import { AiOutlineRise } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa";
+import { BiDotsVerticalRounded } from "react-icons/bi";
+import { BiChevronDown } from "react-icons/bi";
+import Image from "next/image";
 
-const dashboard = () => {
-    const [partEntries, setPartEntries] = useState([]);
-    useEffect(()=>{
-        fetch('http://localhost:4800/api/v1/entries?sort=-createdAt')
-        .then(res => res.json())
-        .then(data => setPartEntries(data.data));
-    },[]);
-    // console.log(partEntries)
-    return (
-        <div>
-          
-        <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between">
-            <h1 className="text-3xl font-bold text-gray-900">
-            Admin Dashboard
-            </h1>
-            <button className='text-black' onClick={_=>signOut()}>Log Out</button>
-        </div>
-        
-        </header>
+const dashboard = ({ Children }) => {
+  // console.log(partEntries)
+  return (
+    <Sidebar >
+      <div className="mx-auto grid lg:grid-cols-3 gap-4" >
+        <div className="col-span-2">
+          {/* Search bar */}
+          <div className="mt-6">
+            <form>
+              <div className="relative flex items-center text-gray-400 focus-within:text-gray-600">
+                <BiSearch className="w-5 h-5 absolute ml-3" />
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Search..."
+                  autoComplete="off"
+                  aria-label="Search..."
+                  className="pr-3 pl-10 w-screen py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none right-2 ring-gray-300 focus:ring-gray-500 bg-gray-100 focus:ring-2"
+                />
+              </div>
+            </form>
+          </div>
+          {/* Search bar end */}
+          <div className="bg-gray-200 mt-10 px-5 py-5 rounded-lg">
+            <div className="grid grid-cols-3 gap-4">
+              <div className="flex bg-gray-100 rounded-lg justify-between px-5 py-5">
+                <div>
+                  <p>Total Search</p>
+                  <span>1234</span>
+                  <p>+ 45% this week</p>
+                </div>
+                <div>
+                  <RiHandHeartFill className="border-slate-200 rounded-3xl bg-gray-200 py-1.5 px-1.5 w-10 h-10" />
+                </div>
+              </div>
+              <div className="flex bg-gray-100 rounded-lg justify-between px-5 py-5">
+                <div>
+                  <p>Total Leads</p>
+                  <span>120</span>
+                  <p>+ 15% this week</p>
+                </div>
+                <div>
+                  <AiOutlineRise className="border-slate-200 rounded-3xl bg-gray-200 py-1.5 px-1.5 w-10 h-10" />
+                </div>
+              </div>
+              <div className="flex bg-gray-100 rounded-lg justify-between px-5 py-5">
+                <div>
+                  <p>Total Visitors</p>
+                  <span>2,20</span>
+                  <p>+ 20% this week</p>
+                </div>
+                <div>
+                  <FaUsers className="border-slate-200 rounded-3xl bg-gray-200 py-1.5 px-1.5 w-10 h-10" />
+                </div>
+              </div>
+            </div>
 
-
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="flex justify-end mb-4">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
-            <Link href="/admin/addAdmin">
-            Add Admin
-            </Link>
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
-            
-            <Link href="/admin/changeLogo">
-            Change Logo
-            </Link>
-            </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            
-            <Link href="/admin/addPages">
-            Add Page
-            </Link>
-            </button>
-        </div>
-        <div className="shadow overflow-hidden border-b border-gray-200 overflow-x-auto sm:rounded-lg">
-            <table className="w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-                <tr>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Request Time
-                </th>
-
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Brand Name
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Model Name
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Year
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Required Parts
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Required Parts
-                </th>
-
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Quantity
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Name
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Email
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Delivery Address
-                </th>
-                <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Phone
-                </th>
-                </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-                {
-                    partEntries.map(partEntry =>
-                        <tr>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                            {new Date(partEntry.createdAt).toLocaleString()}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                            {partEntry.brandName}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                           { partEntry.modelName}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                            {partEntry.year}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.type}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.requiredParts}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.quantity}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.name}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.email}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.deliveryAddress}
-                            </div>
-                        </td>
-                        <td className="px-4 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                                {partEntry.phone}
-                            </div>
-                        </td>
+            <div className="mt-5">
+              <div>
+                <h3 className="text-slate-950 text-lg">Recent</h3>
+              </div>
+              <div className="">
+                <table className="w-full">
+                  <thead>
+                    <tr>
+                      <th className="py-3 text-left text-slate-500">ID</th>
+                      <th className="py-3 text-left text-slate-500">Name</th>
+                      <th className="py-3 text-left text-slate-500" >Date</th>
+                      <th className="py-3 text-left text-slate-500">Amount</th>
+                      <th className="py-3 text-left"></th>
                     </tr>
-                    )
-                }
-                
-            </tbody>
-            </table>
+                  </thead>
+                  <tbody className="">
+                    <tr className="cursor-pointer">
+                      <td className="py-3 text-left">772</td>
+                      <td className="py-3  text-left">Toyota</td>
+                      <td className="py-3  text-left">18 June</td>
+                      <td className="py-3  text-left">$1.05</td>
+                      <td className="py-3 text-right">
+                        <BiDotsVerticalRounded />
+                      </td>
+                    </tr>
+                    <tr className="cursor-pointer">
+                      <td className="py-3  text-left">772</td>
+                      <td className="py-3  text-left">Toyota</td>
+                      <td className="py-3  text-left">18 June</td>
+                      <td className="py-3  text-left">$1.05</td>
+                      <td className="py-3 text-right">
+                        <BiDotsVerticalRounded />
+                      </td>
+                    </tr>
+                    <tr className="cursor-pointer">
+                      <td className="py-3  text-left">772</td>
+                      <td className="py-3  text-left">Toyota</td>
+                      <td className="py-3  text-left">18 June</td>
+                      <td className="py-3  text-left">$1.05</td>
+                      <td className="py-3 text-right">
+                        <BiDotsVerticalRounded />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-    );
+        <div className="pe-4">
+          <div className="mt-6 bg-gray-100 rounded-lg">
+            <div className=" px-5 py-10">
+              <div className="flex place-items-center justify-end">
+                <h1 className="mr-2">Admin</h1>
+                <div className="bg-gray-400 h-8 w-8 rounded-full">
+
+                </div>
+
+                {/* <Image
+                  src=""
+                  alt=""
+                  className="border-slate-200 rounded-full w-10 h-10 bg-gray-400 py-1.5 px-1.5 mr-1.5"
+                /> */}
+
+                <BiChevronDown />
+              </div>
+
+              <div  className="mt-10">
+                <div className="flex justify-between mb-5">
+                  <div>
+                    <h2>Top Brands</h2>
+                  </div>
+                  <div>
+                    <BiDotsVerticalRounded />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">BMW</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Toyota</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Honda</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Mercedes</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10">
+                <div className="flex justify-between mb-5">
+                  <div>
+                    <h2>Top Location</h2>
+                  </div>
+                  <div>
+                    <BiDotsVerticalRounded />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Dubai</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Abu Dubai</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Ajman</p>
+                  </div>
+                  <div className="flex place-items-center mb-3.5">
+                    <span className="border-slate-200 rounded-full w-3 h-3 bg-gray-400 mr-1.5"></span>
+                    <p className="">Sharjah</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Sidebar>
+  );
 };
 
 export default dashboard;
 
 export async function getServerSideProps(context) {
-    const session = await unstable_getServerSession(context.req, context.res, authOptions)
-    if(!session) {
-      return {
-        redirect: {
-          destination: "/login",
-          permanent: false
-        }
-      }
-    }
-  
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (!session) {
     return {
-      props: {
-  
-      }
-    }
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
   }
-  
+
+  return {
+    props: {},
+  };
+}

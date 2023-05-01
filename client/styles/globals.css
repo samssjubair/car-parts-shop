@@ -85,3 +85,20 @@ body {
   text-align: start;
   margin: 2px 0;
 }
+
+.dashboard-sidebar-menu{
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  right: 0;
+  padding-left: 40px;
+  
+}
+
+.leads-btn{
+  border: 1px solid #374151;
+  width: 130px;
+  padding: 4px;
+  border-radius: 25px;
+  margin-right: 30px;
+}
