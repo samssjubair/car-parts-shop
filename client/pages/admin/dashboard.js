@@ -74,10 +74,10 @@ const dashboard = ({ Children }) => {
                 <table className="w-full">
                   <thead>
                     <tr>
-                      <th className="py-3 text-left">ID</th>
-                      <th className="py-3 text-left">Name</th>
-                      <th className="py-3 text-left">Dat</th>
-                      <th className="py-3 text-left">Amoun</th>
+                      <th className="py-3 text-left text-slate-500">ID</th>
+                      <th className="py-3 text-left text-slate-500">Name</th>
+                      <th className="py-3 text-left text-slate-500" >Dat</th>
+                      <th className="py-3 text-left text-slate-500">Amoun</th>
                       <th className="py-3 text-left"></th>
                     </tr>
                   </thead>
