@@ -53,7 +53,7 @@ module.exports.loginController = async (req, res) => {
                 message: "No user found with this email"
             })
         }
-        console.log(password,user.password)
+        // console.log(password,user.password)
 
         const isPasswordValid= password===user.password;
         if(!isPasswordValid){
