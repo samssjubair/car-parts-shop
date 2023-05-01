@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Dialog, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PhoneIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
+import { BsWhatsapp } from "react-icons/bs";
 // import Link from "next/link";
 import axios from "axios";
 
@@ -73,6 +74,24 @@ const Navigation = () => {
                 >
                   Home
                 </Link>
+              <Link
+                  href="/"
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  About Us
+                </Link>
+              <Link
+                  href="/"
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Blog
+                </Link>
+              <Link
+                  href="/"
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Contact 
+                </Link>
                 {
                   allRoutes.map((route,ind) => {
                     return (
@@ -89,14 +108,14 @@ const Navigation = () => {
                 }
                 
               </Popover.Group>
-              {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <Link
-                  href="user/login"
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  href=""
+                  className="w-10 h-10 bg-lime-500 rounded-full "
                 >
-                  Log in <span aria-hidden="true">&rarr;</span>
+                  <BsWhatsapp className="w-5 h-5 navbar-icon"/>
                 </Link>
-              </div> */}
+              </div>
             </nav>
             <Dialog
               as="div"
@@ -126,28 +145,28 @@ const Navigation = () => {
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        Features
+                        Home
                       </a>
                       <a
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        Marketplace
+                        About Us
                       </a>
                       <a
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        Company
+                        Blog
                       </a>
                     </div>
                     <div className="py-6">
-                      <a
+                      <Link
                         href="#"
-                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block  px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 w-10 h-10 bg-lime-500 rounded-full"
                       >
-                        Log in
-                      </a>
+                        <BsWhatsapp className="w-5 h-5"/>
+                      </Link>
                     </div>
                   </div>
                 </div>
