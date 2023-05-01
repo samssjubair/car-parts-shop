@@ -3,6 +3,8 @@ import Sidebar from '../components/Sidebar'
 import { BiSearch } from 'react-icons/bi'
 import axios from 'axios'
 import Link from 'next/link'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const users = () => {
     const [admins,setAdmins]= useState([])
@@ -59,7 +61,7 @@ const users = () => {
             {
                 admins.map((admin)=>(
                     <tr key={admin._id} className="bg-white border-2 border-gray-200">
-                    <td className="px-4 py-2">{admin.name}</td>
+                    <td className="px-4 py-2">{admin.username}</td>
                     <td className="px-4 py-2">{admin.email}</td>
                     <td className="px-4 py-2">{admin.role}</td>
                     <td className="px-4 py-2">
@@ -80,3 +82,24 @@ const users = () => {
 }
 
 export default users
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(
+      context.req,
+      context.res,
+      authOptions
+    );
+    if (!session) {
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false,
+        },
+      };
+    }
+  
+    return {
+      props: {},
+    };
+  }
+  

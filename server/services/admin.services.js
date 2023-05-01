@@ -11,3 +11,8 @@ module.exports.getAllAdminsService = async () => {
     return admins;
 }
 
+module.exports.getUserByEmail = async (email) => {
+    const user = await Admin.findOne({ email });
+    return user;
+}
+
