@@ -76,8 +76,8 @@ const dashboard = ({ Children }) => {
                     <tr>
                       <th className="py-3 text-left text-slate-500">ID</th>
                       <th className="py-3 text-left text-slate-500">Name</th>
-                      <th className="py-3 text-left text-slate-500" >Dat</th>
-                      <th className="py-3 text-left text-slate-500">Amoun</th>
+                      <th className="py-3 text-left text-slate-500" >Date</th>
+                      <th className="py-3 text-left text-slate-500">Amount</th>
                       <th className="py-3 text-left"></th>
                     </tr>
                   </thead>
