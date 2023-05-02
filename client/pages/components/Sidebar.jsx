@@ -30,13 +30,13 @@ const Sidebar = ({children}) => {
             <TiMessages className=" mr-1 w-6" />
             <Link href="/admin/carsData" className="text-slate-500">Cars Data</Link>
           </div>
-          <div className={`${router.pathname === "/admin/addAdmin" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
+          <div className={`${router.pathname === "/admin/users" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
             <FaUsers className=" mr-1 w-6" />
             <Link href="/admin/users" className="text-slate-500">User</Link>
           </div>
-          <div className={`${router.pathname === "/admin/addPages" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
+          <div className={`${router.pathname === "/admin/pages" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
             <FaUsers className=" mr-1 w-6 stroke-slate-500" />
-            <Link href="/admin/addPages" className="text-slate-500">Pages</Link>
+            <Link href="/admin/pages" className="text-slate-500">Pages</Link>
           </div>
           <div className={`${router.pathname === "/admin/settings" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
             <IoMdSettings className=" mr-1 w-6" />
