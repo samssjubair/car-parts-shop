@@ -9,11 +9,43 @@ import { signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
 import { BiSearch } from "react-icons/bi";
 
+
 function settings() {
   const [logoFile, setLogoFile] = useState(null);
   const [title,setTitle] = useState("");
   const [favicon,setFavicon] = useState(null);
   const [metaDescription,setMetaDescription] = useState("");
+  const [keywords, setKeywords] = useState([]);
+
+  const [tags, setTags] = useState([])
+
+    function handleKeyDown(e){
+        // If user did not press enter key, return
+        if(e.key !== ' ') return
+        // Get the value of the input
+        const value = e.target.value
+        // If the value is empty, return
+        if(!value.trim()) return
+        // Add the value to the tags array
+        setTags([...tags, value])
+        // Clear the input
+        e.target.value = ''
+    }
+
+    function removeTag(index){
+      setTags(tags.filter((el, i) => i !== index))
+  }
+
+  // const handleKeyDown = (event) => {
+  //   if (event.keyCode === 32) { // check if spacebar is pressed
+  //     event.preventDefault();
+  //     const value = event.target.value.trim(); // remove leading/trailing spaces
+  //     if (value.length > 0) { // check if input value is not empty
+  //       setKeywords((prevKeywords) => [...prevKeywords, value]); // add keyword to list
+  //       event.target.value = ""; // clear input value
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     axios.get('http://localhost:4800/api/v1/metadescription/')
@@ -225,14 +257,44 @@ function settings() {
                   </form>
                 </div>
               </div>
-              <div className="mt-7">
-                <label className="ml-4">SEO Keywords</label>
-                <input
-                  type="text"
-                  placeholder="SEO Keywords"
-                  className="pr-3 pl-5 w-full rounded-md py-2 bg-white text-sm"
-                />
+
+              {/* <div className="flex flex-col gap-1">
+                <label htmlFor="keywords" className="font-medium text-gray-700">
+                  Keywords
+                </label>
+                <div className="relative flex flex-row-reverse">
+                  <input
+                    id="keywords"
+                    type="text"
+                    className="block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Type keywords and press space"
+                    onKeyDown={handleKeyDown}
+                  />
+                  <div className="flex flex-wrap items-center justify-start">
+                    {keywords.map((keyword, index) => (
+                      <span
+                        key={index}
+                        className="inline-block px-2 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full mr-1"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div> */}
+
+              <div className="tags-input-container">
+                  { tags.map((tag, index) => (
+                      <div className="tag-item" key={index}>
+                          <span className="text">{tag}</span>
+                          <span className="close" onClick={() => removeTag(index)}>&times;</span>
+                      </div>
+                  )) }
+                  <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="Type somthing" />
               </div>
+
+
+
               <div className="mt-7">
                 <label className="ml-4">SEO Description</label>
                 <textarea
