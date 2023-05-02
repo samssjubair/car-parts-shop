@@ -33,3 +33,88 @@ body {
   height: 700px;
   border-radius: 5px;
 }
+
+.slider-img{
+  width: 1200px;
+  height: 500px;
+}
+
+.car-form-bg-color{
+  background-color: #90B0CD;
+}
+
+.home-car-form-btn{
+  background-color: #1B5D98;
+  color: #fff;
+}
+
+.footer-icon-menu{
+  margin-right: 5px;
+}
+.footer-icon{
+  color: #fff;
+  width: 30px;
+  height: 30px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  /* z-index: 1; */
+  /* position: relative; */
+  z-index: 10;
+  /* width: 100%; */
+  background-color: white;
+  padding: 0 8px;
+  color: black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+}
+
+.dd-parent{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dd-parent input{
+  width: 100%;
+}
+
+.dropdown:empty {
+  border: none;
+}
+
+.dropdown-row {
+  cursor: pointer;
+  text-align: start;
+  margin: 2px 0;
+}
+
+.dashboard-sidebar-menu{
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  right: 0;
+  padding-left: 40px;
+  
+}
+
+.leads-btn{
+  border: 1px solid #374151;
+  width: 130px;
+  padding: 4px;
+  border-radius: 25px;
+}
+
+
+.navbar-icon{
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+

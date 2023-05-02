@@ -25,6 +25,24 @@ const entrySchema=mongoose.Schema({
         required: true,
         trim: true
     },
+    type:{
+        type: String,
+        required: true,
+        enum: {
+            values: ["gcc", "american", "japanese", "others"],
+            message: "Please select a valid type"
+        }
+    },
+    quantity: {
+        type: Number,
+        // required: true,
+        min: [1, "Quantity must be more than 1"]
+    },
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
     email: {
         type: String,
         validate: [validator.isEmail, "Please provide a valid email"],

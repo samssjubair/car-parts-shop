@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from 'next/link'
 import { Dialog, Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PhoneIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
-import Link from "next/link";
+import { BsWhatsapp } from "react-icons/bs";
+// import Link from "next/link";
+import axios from "axios";
 
 const callsToAction = [
     { name: "Watch demo", href: "#", icon: PlayCircleIcon },
@@ -16,6 +19,30 @@ function classNames(...classes) {
 
 const Navigation = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [allAdminCreatedRoute, setAllAdminCreatedRoute] = useState([]);
+    const [logoUrl, setLogoUrl] = useState('');
+
+    useEffect(() => {
+      fetch('http://localhost:4800/api/v1/logo')
+        .then(response => response.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          setLogoUrl(url);
+        });
+    }, []);
+
+    useEffect(() => {
+        axios.get("http://localhost:4800/api/v1/pages").then((res) => {
+            setAllAdminCreatedRoute(res.data.data);
+        });
+    }, []);
+
+    const allRoutes= allAdminCreatedRoute.map((route) => {
+      return route.route
+    })
+    // console.log(allRoutes)
+  
+
   return (
     <div>
       {/* Navigation */}
@@ -26,7 +53,8 @@ const Navigation = () => {
             >
               <div className="flex lg:flex-1">
                 <Link href="/" className="-m-1.5 p-1.5">
-                  <h1 className="text-gray-900">CarPartz</h1>
+                  {/* <h1 className="text-gray-900">CarPartz</h1> */}
+                  <img className="h-10" src={logoUrl} alt="Logo" />
                 </Link>
               </div>
               <div className="flex lg:hidden">
@@ -40,31 +68,28 @@ const Navigation = () => {
                 </button>
               </div>
               <Popover.Group className="hidden lg:flex lg:gap-x-12">
-                <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Home
-                </Link>
-                <Link
-                  href="#"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Marketplace
-                </Link>
-                <Link
-                  href="#"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Company
-                </Link>
+                {
+                  allRoutes.map((route,ind) => {
+                    return (
+                      <Link
+                        key={ind}
+                        href= {`/${route}`}
+                        
+                        className="text-sm capitalize font-semibold leading-6 text-gray-900"
+                      >
+                        {route}
+                      </Link>
+                    )
+                  })
+                }
+                
               </Popover.Group>
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <Link
-                  href="user/login"
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  href="tel: +1234567890"
+                  className="w-10 h-10 bg-lime-500 rounded-full "
                 >
-                  Log in <span aria-hidden="true">&rarr;</span>
+                  <BsWhatsapp className="w-5 h-5 navbar-icon"/>
                 </Link>
               </div>
             </nav>
@@ -96,28 +121,28 @@ const Navigation = () => {
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        Features
+                        Home
                       </a>
                       <a
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        Marketplace
+                        About Us
                       </a>
                       <a
                         href="#"
                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
-                        Company
+                        Blog
                       </a>
                     </div>
                     <div className="py-6">
-                      <a
+                      <Link
                         href="#"
-                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block  px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 w-10 h-10 bg-lime-500 rounded-full"
                       >
-                        Log in
-                      </a>
+                        <BsWhatsapp className="w-5 h-5"/>
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -22,7 +22,7 @@ module.exports.getAllEntries = async (req, res) => {
             queries.limit=limit;
 
         }
-        console.log(queries)
+        // console.log(queries)
 
         if(req.query.sort){
             const sortBy=req.query.sort.split(',').join(' ');
