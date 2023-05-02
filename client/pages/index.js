@@ -23,7 +23,7 @@ export default function Home() {
       <div>
         <HomeSlider />
       </div>
-      <div className="flex justify-center">
+      <div className="flex text-black justify-center">
         <div className=" w-11/12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-9 pb-4">
             <div className="flex">
@@ -31,7 +31,7 @@ export default function Home() {
                 <Image src={serviceIcon1} alt="" className="mr-4" />
               </div>
               <div>
-                <h4 className="text-xl font-bold">Original Products</h4>
+                <h4 className="text-md font-bold">Original Products</h4>
                 <p className="text-slate-500 text-sm">
                   Only parts from trusted brands
                 </p>
@@ -42,7 +42,7 @@ export default function Home() {
                 <Image src={serviceIcon2} alt="" className="mr-4" />
               </div>
               <div>
-                <h4 className="text-xl font-bold">Fast Delivery</h4>
+                <h4 className="text-md font-bold">Fast Delivery</h4>
                 <p className="text-slate-500 text-sm">
                   Free shipping over AED299
                 </p>
@@ -53,7 +53,7 @@ export default function Home() {
                 <Image src={serviceIcon3} alt="" className="mr-4" />
               </div>
               <div>
-                <h4 className="text-xl font-bold">3 Days Return</h4>
+                <h4 className="text-md font-bold">3 Days Return</h4>
                 <p className="text-slate-500 text-sm">3 days open purchase</p>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function Home() {
                 <Image src={serviceIcon4} alt="" className="mr-4" />
               </div>
               <div>
-                <h4 className="text-xl font-bold">Dedicated Support</h4>
+                <h4 className="text-md font-bold">Dedicated Support</h4>
                 <p className="text-slate-500 text-sm">Available support 24/7</p>
               </div>
             </div>

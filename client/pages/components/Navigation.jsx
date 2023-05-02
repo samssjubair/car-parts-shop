@@ -68,33 +68,6 @@ const Navigation = () => {
                 </button>
               </div>
               <Popover.Group className="hidden lg:flex lg:gap-x-12">
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Home
-                </Link>
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  About Us
-                </Link>
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Blog
-                </Link>
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Contact 
-                </Link>
-                {
-                  console.log(allRoutes)
-                }
                 {
                   allRoutes.map((route,ind) => {
                     return (
