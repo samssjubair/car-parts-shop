@@ -11,6 +11,24 @@ import { BiSearch } from "react-icons/bi";
 
 function settings() {
   const [logoFile, setLogoFile] = useState(null);
+  const [title,setTitle] = useState("");
+  const [favicon,setFavicon] = useState(null);
+
+
+  const handleTitleBlur=(e)=>{
+    // e.preventDefault();
+    // console.log(e.target.value);
+    axios.patch('http://localhost:4800/api/v1/sitename/',{
+      appName:e.target.value
+    })
+    .then(res=>{
+      console.log(res);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+
+  }
 
   const handleLogoUpload = async (e) => {
     e.preventDefault();
@@ -26,6 +44,26 @@ function settings() {
       // console.log(response.data);
       alert("Logo uploaded successfully");
       setLogoFile(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFaviconUpload = async (e) => {
+    // console.log("mama fav")
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("favicon", favicon);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4800/api/v1/favicon/",
+        formData
+      );
+      // console.log(response.data);
+      alert("Favicon uploaded successfully");
+      setFavicon(null);
     } catch (error) {
       console.error(error);
     }
@@ -53,22 +91,24 @@ function settings() {
           </div>
           {/* Search bar end */}
           <div
-            style={{ height: "85vh" }}
+           
             className="bg-gray-100 rounded-md mt-10 px-4 py-10"
           >
             <div className="">
               <div className="flex justify-between">
                 <div>
-                  <h1>Settings</h1>
+                  <h1 className="text-2xl font-bold">Settings</h1>
                 </div>
                 <div>
-                  <button className="leads-btn hover:bg-slate-300">save</button>
+                  <button className="leads-btn hover:bg-slate-300">Save</button>
                 </div>
               </div>
               <div>
                 <label className="ml-4">Site Title</label>
                 <input
                   type="text"
+                  // value={title}
+                  onBlur={handleTitleBlur}
                   placeholder="CarPartz"
                   className="pr-3 pl-5 w-full rounded-md text-sm py-2"
                 />
@@ -119,7 +159,7 @@ function settings() {
                   </form>
                 </div>
                 <div className="">
-                  <form onSubmit={handleLogoUpload} className="">
+                  <form onSubmit={handleFaviconUpload} className="">
                     <label
                       htmlFor="logo-upload"
                       className="mb-4 text-xl font-medium"
@@ -128,7 +168,7 @@ function settings() {
                     </label>
                     <div className="flex">
                       <label
-                        htmlFor="logo-upload"
+                        htmlFor="favicon-upload"
                         className="flex flex-col items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
                       >
                         <svg
@@ -148,9 +188,9 @@ function settings() {
                         </span>
                         <input
                           type="file"
-                          id="logo-upload"
+                          id="favicon-upload"
                           className="hidden"
-                          onChange={(e) => setLogoFile(e.target.files[0])}
+                          onChange={(e) => setFavicon(e.target.files[0])}
                         />
                       </label>
                     </div>
@@ -158,7 +198,7 @@ function settings() {
                       type="submit"
                       className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                     >
-                      Upload Logo
+                      Upload Favicon
                     </button>
                   </form>
                 </div>

@@ -8,14 +8,25 @@ import { FaUsers } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Sidebar = ({children}) => {
   const router = useRouter();
+  const [siteName, setSiteName] = useState('');
+  useEffect(() => {
+    axios.get('http://localhost:4800/api/v1/sitename')
+      .then(res => {
+        setSiteName(res.data.appName)
+        // setSiteName(res.data.data[0].appName)
+      })
+  }, []);
+
   return (
     <div style={{overflowX: 'hidden'}} className="flex bg-white text-black">
       <div className="h-screen w-72 max-w-7xl px-6">
         <div className="">
-          <h3 className="pt-6 text-2xl text-slate-500">CarPartz</h3>
+          <h3 className="pt-6 ms-8 text-2xl text-slate-500">{siteName}</h3>
         </div>
         <div className="mt-32">
           <div className={`${router.pathname === "/admin/dashboard" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg`} >
