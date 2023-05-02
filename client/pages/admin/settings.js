@@ -52,7 +52,10 @@ function settings() {
             </form>
           </div>
           {/* Search bar end */}
-          <div style={{ height: "85vh" }} className="bg-gray-100 rounded-md mt-10 px-4 py-10">
+          <div
+            style={{ height: "85vh" }}
+            className="bg-gray-100 rounded-md mt-10 px-4 py-10"
+          >
             <div className="">
               <div className="flex justify-between">
                 <div>
@@ -75,7 +78,7 @@ function settings() {
                   <form onSubmit={handleLogoUpload} className="">
                     <label
                       htmlFor="logo-upload"
-                      className="mb-2 text-3xl font-medium"
+                      className="mb-2 text-xl font-medium"
                     >
                       logo upload
                     </label>
@@ -119,7 +122,7 @@ function settings() {
                   <form onSubmit={handleLogoUpload} className="">
                     <label
                       htmlFor="logo-upload"
-                      className="mb-2 text-3xl font-medium"
+                      className="mb-4 text-xl font-medium"
                     >
                       Favicon logo upload
                     </label>
@@ -173,7 +176,7 @@ function settings() {
                 <textarea
                   type="text"
                   placeholder="Here is the text space for seo description for the site where admin can write free text"
-                  className="pr-3 pl-5 h-14 w-full rounded-md text-sm"
+                  className="pr-3 pl-5 h-64 w-full rounded-md text-sm"
                 />
               </div>
             </div>
