@@ -15,13 +15,33 @@ function settings() {
   const [title,setTitle] = useState("");
   const [favicon,setFavicon] = useState(null);
   const [metaDescription,setMetaDescription] = useState("");
-  const [keywords, setKeywords] = useState([]);
-
+  // const [keywords, setKeywords] = useState([]);
   const [tags, setTags] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:4800/api/v1/metatag/')
+    .then(res => {
+      // console.log(res.data.tag)
+      // setKeywords(res.data.tag)
+      const keywords = res.data.tag.split(',');
+      setTags(keywords);
+    })
+  }, [])
+
+  const saveMetaTag=(tg)=>{
+    console.log("tgggg",tg.join(','));
+    axios.put('http://localhost:4800/api/v1/metatag/',{
+      tag:tg.join(', ')
+    })
+    .then(res=>{
+      console.log(res);
+    })
+
+  }
 
     function handleKeyDown(e){
         // If user did not press enter key, return
-        if(e.key !== ' ') return
+        if(e.key !== ' ' && e.key !=='Enter') return
         // Get the value of the input
         const value = e.target.value
         // If the value is empty, return
@@ -30,10 +50,12 @@ function settings() {
         setTags([...tags, value])
         // Clear the input
         e.target.value = ''
+        saveMetaTag([...tags, value]);
     }
 
     function removeTag(index){
       setTags(tags.filter((el, i) => i !== index))
+      saveMetaTag([...tags.filter((el, i) => i !== index)]);
   }
 
   // const handleKeyDown = (event) => {

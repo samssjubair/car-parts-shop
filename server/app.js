@@ -9,6 +9,7 @@ const faviconRouter=  require('./routes/favicon.route');
 const adminRouter=  require('./routes/admin.route');
 const sitenameRouter=  require('./routes/sitename.route');
 const metaDescription= require('./routes/metaDescription.route');
+const metatag= require('./routes/metatag.route');
 
 app.use(express.json());
 app.use(cors());
@@ -36,5 +37,6 @@ app.use('/api/v1/favicon',faviconRouter);
 app.use('/api/v1/admin',adminRouter);
 app.use('/api/v1/sitename',sitenameRouter);
 app.use('/api/v1/metadescription',metaDescription);
+app.use('/api/v1/metatag',metatag);
 
 module.exports =app;
