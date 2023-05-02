@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { useRouter } from 'next/router';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import HomeSlider from './components/HomeSlider';
 
 const adminCreatedPage = (props) => {
     // console.log(props)
@@ -15,18 +16,19 @@ const adminCreatedPage = (props) => {
 
 
     return (
-        <div>
+        <div className='bg-white text-black'>
             <div>
                 <Navigation />
             </div>
             
+            <HomeSlider/>
 
 
 
             <div style={{height: '65vh'}}  className="container  mx-auto py-4">
                 <div className='mb-10'>
                     <h1 className="text-4xl font-bold mb-4 uppercase text-center">{page.title}</h1>
-                    <h3>
+                    <h3 className='text-2xl text-center'>
                         {page.subheader}
                     </h3>
                 </div>

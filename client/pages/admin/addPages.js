@@ -5,6 +5,7 @@ import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
+import { BiSearch } from "react-icons/bi";
 
 function AddPages() {
   const [pageRoute, setPageRoute] = useState("");
@@ -35,9 +36,43 @@ function AddPages() {
 
   return (
     <Sidebar>
+      <div className="mt-6">
+        <form>
+          <div className="relative flex items-center text-gray-400 focus-within:text-gray-600">
+            <BiSearch className="w-5 h-5 absolute ml-3" />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              autoComplete="off"
+              aria-label="Search..."
+              className="pr-3 pl-10 w-screen py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none right-2 ring-gray-300 focus:ring-gray-500 bg-gray-100 focus:ring-2"
+            />
+          </div>
+        </form>
+      </div>
       <div className="w-2/3 mx-auto ">
-        <h1 className="text-3xl mt-20 font-bold mb-4 text-center">Add New Page</h1>
+        <h2 className="text-3xl mt-10 font-bold mb-4 ">Add Page</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label
+              htmlFor="page-title"
+              className="block text-sm font-medium text-black"
+            >
+              Page Title
+            </label>
+            <div className="mt-1">
+              <input
+                type="text"
+                name="page-title"
+                id="page-title"
+                value={pageTitle}
+                onChange={(event) => setPageTitle(event.target.value)}
+                required
+                className="border-gray-300 px-2 border-2 focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              />
+            </div>
+          </div>
           <div className="text-black">
             <label
               htmlFor="page-route"
@@ -58,25 +93,7 @@ function AddPages() {
             </div>
           </div>
           
-          <div>
-            <label
-              htmlFor="page-title"
-              className="block text-sm font-medium text-black"
-            >
-              Page Title
-            </label>
-            <div className="mt-1">
-              <input
-                type="text"
-                name="page-title"
-                id="page-title"
-                value={pageTitle}
-                onChange={(event) => setPageTitle(event.target.value)}
-                required
-                className="border-gray-300 px-2 border-2 focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-            </div>
-          </div>
+          
           <div className="text-black">
             <label
               htmlFor="page-route"
