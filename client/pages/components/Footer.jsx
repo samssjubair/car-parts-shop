@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-      <p className='text-center text-gray-400 pb-2'>© 2023 CarPartz.All Rights Reserved</p>
+      <p className='text-center text-slate-700 pb-2 pt-4'>© 2023 CarPartz.All Rights Reserved</p>
     </div>
   )
 }

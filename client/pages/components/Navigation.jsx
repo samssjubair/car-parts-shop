@@ -22,20 +22,20 @@ const Navigation = () => {
     const [allAdminCreatedRoute, setAllAdminCreatedRoute] = useState([]);
     const [logoUrl, setLogoUrl] = useState('');
 
-    // useEffect(() => {
-    //   fetch('http://localhost:4800/api/v1/logo')
-    //     .then(response => response.blob())
-    //     .then(blob => {
-    //       const url = URL.createObjectURL(blob);
-    //       setLogoUrl(url);
-    //     });
-    // }, []);
+    useEffect(() => {
+      fetch('http://localhost:4800/api/v1/logo')
+        .then(response => response.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          setLogoUrl(url);
+        });
+    }, []);
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:4800/api/v1/pages").then((res) => {
-    //         setAllAdminCreatedRoute(res.data.data);
-    //     });
-    // }, []);
+    useEffect(() => {
+        axios.get("http://localhost:4800/api/v1/pages").then((res) => {
+            setAllAdminCreatedRoute(res.data.data);
+        });
+    }, []);
 
     const allRoutes= allAdminCreatedRoute.map((route) => {
       return route.route
@@ -92,6 +92,9 @@ const Navigation = () => {
                 >
                   Contact 
                 </Link>
+                {
+                  console.log(allRoutes)
+                }
                 {
                   allRoutes.map((route,ind) => {
                     return (

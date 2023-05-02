@@ -1,7 +1,7 @@
 // import { Alert, Button, Grid, TextField } from '@mui/material'
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Login() {
   const router = useRouter();
@@ -54,47 +54,29 @@ export default function Login() {
       });
   };
 
-  return (
+
+
+    return (
     <div>
       <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto pt-6 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900">CarPartz</h1>
           {/* <button className='text-black' onClick={_=>signOut()}>Log Out</button> */}
         </div>
-      </header>
-      <div class="flex flex-col h-screen justify-center items-center bg-black-900">
-        <h1 class="text-4xl font-bold mb-8">Admin Login</h1>
-        <div class="bg-white shadow-lg rounded-lg w-1/3 p-8">
-          {pageState.error !== "" && (
-            <span className="text-red-800">
-              {simplifyError(pageState.error)}
-            </span>
-          )}
-          <input
-            class="w-full px-4 py-2 border rounded-lg text-black mb-4"
-            onChange={handleFieldChange}
-            value={authState.email}
-            placeholder="Email"
-            id="email"
-            type="email"
-          />
-          <input
-            class="w-full px-4 py-2 border rounded-lg text-black mb-4"
-            onChange={handleFieldChange}
-            value={authState.password}
-            placeholder="Password"
-            type="password"
-            id="password"
-          />
-          <button
-            class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg disabled:opacity-50"
-            disabled={pageState.processing}
-            onClick={handleAuth}
-          >
-            Login
-          </button>
+        
+        </header>
+        <div className="flex flex-col h-screen justify-center items-center text-black    bg-white">
+            <h1 className="text-4xl font-bold mb-8">Admin Login</h1>
+            <div className="bg-white shadow-lg rounded-lg w-1/3 p-8">
+                {
+                    pageState.error !== '' && <span className='text-red-800'>{(simplifyError(pageState.error))}</span>
+                }
+                <input className="w-full px-4 py-2 border rounded-lg text-black mb-4" onChange={handleFieldChange} value={authState.email} placeholder="Email" id='email' type='email' />
+                <input className="w-full px-4 py-2 border rounded-lg text-black mb-4" onChange={handleFieldChange} value={authState.password} placeholder="Password" type='password' id='password' />
+                <button className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg disabled:opacity-50" disabled={pageState.processing} onClick={handleAuth}>Login</button>
+            </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }

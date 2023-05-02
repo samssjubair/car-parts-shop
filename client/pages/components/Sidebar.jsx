@@ -12,8 +12,8 @@ import { useRouter } from "next/router";
 const Sidebar = ({children}) => {
   const router = useRouter();
   return (
-    <div className="flex">
-      <div className="h-screen w-44 max-w-7xl px-6">
+    <div style={{overflowX: 'hidden'}} className="flex bg-white text-black">
+      <div className="h-screen w-72 max-w-7xl px-6">
         <div className="">
           <h3 className="pt-6 text-2xl text-slate-500">CarPartz</h3>
         </div>
@@ -32,7 +32,7 @@ const Sidebar = ({children}) => {
           </div>
           <div className={`${router.pathname === "/admin/addAdmin" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
             <FaUsers className=" mr-1 w-6" />
-            <Link href="/admin/addAdmin" className="text-slate-500">User</Link>
+            <Link href="/admin/users" className="text-slate-500">User</Link>
           </div>
           <div className={`${router.pathname === "/admin/addPages" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
             <FaUsers className=" mr-1 w-6 stroke-slate-500" />
@@ -40,17 +40,19 @@ const Sidebar = ({children}) => {
           </div>
           <div className={`${router.pathname === "/admin/settings" ? 'bg-gray-100': ''} flex items-center hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg mt-3`}>
             <IoMdSettings className=" mr-1 w-6" />
-            <Link href="/admin/settings" className="text-slate-500">Settings</Link>
+            <Link href="/admin/settings" className="text-slate-500">
+              Settings
+              </Link>
           </div>
         </div>
-        <div className="dashboard-sidebar-menu hover:bg-gray-100 w-70 h-10 pl-5 pr-3 rounded-lg">
-          <button className="flex items-center text-slate-500" onClick={(_) => signOut()}>
+        <div className="dashboard-sidebar-menu  h-10 pl-5 pr-3 rounded-lg">
+          <button className="flex items-center  text-slate-500" onClick={(_) => signOut()}>
             <AiOutlineLogout className=" mr-1 w-6" />
             Log Out
           </button>
         </div>
       </div>
-      <div>
+      <div className="w-full">
         {children}
       </div>
     </div>

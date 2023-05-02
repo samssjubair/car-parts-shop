@@ -39,6 +39,15 @@ body {
   height: 500px;
 }
 
+.car-form-bg-color{
+  background-color: #90B0CD;
+}
+
+.home-car-form-btn{
+  background-color: #1B5D98;
+  color: #fff;
+}
+
 .footer-icon-menu{
   margin-right: 5px;
 }
@@ -90,6 +99,9 @@ body {
   position: absolute;
   bottom: 2rem;
   width: 100%;
+  right: 0;
+  padding-left: 40px;
+  
 }
 
 .leads-btn{

@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import axios from "axios";
 
 export const authOptions = {
     pages: {
@@ -13,16 +14,31 @@ export const authOptions = {
             //     password: { label: "Password", type: "password" }
             // },
             async authorize(credentials, req) {
+                try {
+                    // Make an API request to verify the user's credentials
+                    const response = await axios.post(
+                      "http://localhost:4800/api/v1/admin/login",
+                      {
+                        email: credentials.email,
+                        password: credentials.password,
+                      }
+                    );
+                    const data = response.data;
 
-                if(credentials.email === "admin@gmail.com" && credentials.password === "123456") {
-                    return {
-                        user: {
-                            name: "admin",
-                        }
+                    if (data.user) {
+                        return {
+                          user: {
+                            name: data.user.username,
+                            email: data.user.email,
+                          },
+                        };
+                      } else {
+                        return null;
+                      }
+                    } catch (error) {
+                      console.error(error);
+                      return null;
                     }
-                }
-
-                return null
             }
         })
     ],

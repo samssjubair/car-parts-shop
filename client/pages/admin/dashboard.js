@@ -12,8 +12,8 @@ import Image from "next/image";
 const dashboard = ({ Children }) => {
   // console.log(partEntries)
   return (
-    <Sidebar>
-      <div className="mx-auto grid lg:grid-cols-3 gap-4">
+    <Sidebar >
+      <div className="mx-auto grid lg:grid-cols-3 gap-4" >
         <div className="col-span-2">
           {/* Search bar */}
           <div className="mt-6">
@@ -76,15 +76,15 @@ const dashboard = ({ Children }) => {
                     <tr>
                       <th className="py-3 text-left text-slate-500">ID</th>
                       <th className="py-3 text-left text-slate-500">Name</th>
-                      <th className="py-3 text-left text-slate-500" >Dat</th>
-                      <th className="py-3 text-left text-slate-500">Amoun</th>
+                      <th className="py-3 text-left text-slate-500" >Date</th>
+                      <th className="py-3 text-left text-slate-500">Amount</th>
                       <th className="py-3 text-left"></th>
                     </tr>
                   </thead>
                   <tbody className="">
                     <tr className="cursor-pointer">
                       <td className="py-3 text-left">772</td>
-                      <td className="py-3  text-left">Mackbook</td>
+                      <td className="py-3  text-left">Toyota</td>
                       <td className="py-3  text-left">18 June</td>
                       <td className="py-3  text-left">$1.05</td>
                       <td className="py-3 text-right">
@@ -93,7 +93,7 @@ const dashboard = ({ Children }) => {
                     </tr>
                     <tr className="cursor-pointer">
                       <td className="py-3  text-left">772</td>
-                      <td className="py-3  text-left">Mackbook</td>
+                      <td className="py-3  text-left">Toyota</td>
                       <td className="py-3  text-left">18 June</td>
                       <td className="py-3  text-left">$1.05</td>
                       <td className="py-3 text-right">
@@ -102,7 +102,7 @@ const dashboard = ({ Children }) => {
                     </tr>
                     <tr className="cursor-pointer">
                       <td className="py-3  text-left">772</td>
-                      <td className="py-3  text-left">Mackbook</td>
+                      <td className="py-3  text-left">Toyota</td>
                       <td className="py-3  text-left">18 June</td>
                       <td className="py-3  text-left">$1.05</td>
                       <td className="py-3 text-right">
@@ -115,17 +115,20 @@ const dashboard = ({ Children }) => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="pe-4">
           <div className="mt-6 bg-gray-100 rounded-lg">
             <div className=" px-5 py-10">
               <div className="flex place-items-center justify-end">
                 <h1 className="mr-2">Admin</h1>
+                <div className="bg-gray-400 h-8 w-8 rounded-full">
 
-                <Image
+                </div>
+
+                {/* <Image
                   src=""
                   alt=""
                   className="border-slate-200 rounded-full w-10 h-10 bg-gray-400 py-1.5 px-1.5 mr-1.5"
-                />
+                /> */}
 
                 <BiChevronDown />
               </div>

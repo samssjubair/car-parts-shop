@@ -13,6 +13,11 @@ const pagesSchema=mongoose.Schema({
         trim: true,
         unique: true
     },
+    subheader: {
+        type: String,
+        required: true,
+        trim: true
+    },
     content: {
         type: String,
         required: true,

@@ -29,14 +29,14 @@ const leads = () => {
         </form>
       </div>
       {/* Search bar end */}
-      <div className="shadow overflow-hidden border-b border-gray-200 overflow-x-auto sm:rounded-lg mt-10 bg-gray-100 h-screen ">
+      <div style={{height: '85vh'}} className="shadow overflow-auto  border-b border-gray-200 overflow-x-auto sm:rounded-lg mt-10 bg-gray-100  ">
         <div className=" flex pt-6 pl-4 justify-between">
-          <div>
+          {/* <div>
             <h1 className="text-xl mb-4">Leads</h1>
-          </div>
+          </div> */}
           <div>
-            <button className="leads-btn">
-              Eport
+            <button className="leads-btn hover:bg-slate-300">
+              Export Data
             </button>
           </div>
         </div>
@@ -47,7 +47,7 @@ const leads = () => {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                ID
+                timestamps
               </th>
 
               <th
@@ -79,7 +79,13 @@ const leads = () => {
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Condition
+                Parts Type
+              </th>
+              <th
+                scope="col"
+                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                quantity
               </th>
               <th
                 scope="col"
@@ -87,24 +93,24 @@ const leads = () => {
               >
                 Name
               </th>
+
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
                 Email
               </th>
-
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Phone
+                Contact No
               </th>
               <th
                 scope="col"
                 className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Status
+                Address
               </th>
             </tr>
           </thead>
@@ -156,14 +162,15 @@ const leads = () => {
                     {partEntry.email}
                   </div>
                 </td>
+                
                 <td className="px-4 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">
-                    {partEntry.deliveryAddress}
+                    {partEntry.phone}
                   </div>
                 </td>
                 <td className="px-4 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">
-                    {partEntry.phone}
+                    {partEntry.deliveryAddress}
                   </div>
                 </td>
               </tr>

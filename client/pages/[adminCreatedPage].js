@@ -4,7 +4,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
 const adminCreatedPage = (props) => {
-    console.log(props)
+    // console.log(props)
     const [page,setPage]= useState(props.page);
 
     const router = useRouter();
@@ -19,9 +19,18 @@ const adminCreatedPage = (props) => {
             <div>
                 <Navigation />
             </div>
-            <div style={{height: '65vh'}}  class="container  mx-auto py-4">
-                <h1 class="text-4xl font-bold mb-4 uppercase text-center">{page.title}</h1>
-                <p class="text-lg text-center">{page.content}</p>
+            
+
+
+
+            <div style={{height: '65vh'}}  className="container  mx-auto py-4">
+                <div className='mb-10'>
+                    <h1 className="text-4xl font-bold mb-4 uppercase text-center">{page.title}</h1>
+                    <h3>
+                        {page.subheader}
+                    </h3>
+                </div>
+                <p className="text-lg text-center">{page.content}</p>
             </div>
 
             <div>
@@ -33,10 +42,11 @@ const adminCreatedPage = (props) => {
 
 export async function getServerSideProps(context) {
     const {adminCreatedPage} = context.query;
-    console.log("hi",adminCreatedPage);
+    // console.log("hi",adminCreatedPage);
     const res = await fetch(`http://localhost:4800/api/v1/pages?route=${adminCreatedPage}`);
+    console.log(res)
     const data = await res.json();
-    console.log(data.data)
+    // console.log(data.data)
     return {
         props: {
             page: data.data

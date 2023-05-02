@@ -21,7 +21,7 @@ module.exports.savePages = async (req, res) => {
 module.exports.getPage = async (req, res) => {
     try {
         const {route}=req.query;
-        console.log(route)
+        // console.log(route)
         const page= await getPageByNameService(route);
         res.status(200).json({
             success: true,

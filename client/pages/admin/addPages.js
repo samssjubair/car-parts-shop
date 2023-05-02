@@ -10,6 +10,7 @@ function AddPages() {
   const [pageRoute, setPageRoute] = useState("");
   const [pageTitle, setPageTitle] = useState("");
   const [pageContent, setPageContent] = useState("");
+  const [subheader,setSubHeader] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,14 +18,15 @@ function AddPages() {
       route: pageRoute,
       title: pageTitle,
       content: pageContent,
+      subheader:subheader
     };
-    console.log(data);
+    // console.log(data)
     try {
       const response = await axios.post(
         "http://localhost:4800/api/v1/pages",
         data
       );
-      //   console.log(response.data);
+        console.log(response.data);
       alert("Page added successfully");
     } catch (error) {
       console.log(error);
@@ -33,13 +35,13 @@ function AddPages() {
 
   return (
     <Sidebar>
-      <div className="max-w-lg mx-auto">
-        <h1 className="text-3xl mt-20 font-bold mb-4">Add New Page</h1>
+      <div className="w-2/3 mx-auto ">
+        <h1 className="text-3xl mt-20 font-bold mb-4 text-center">Add New Page</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div className="text-black">
             <label
               htmlFor="page-route"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-black-300"
             >
               Page Route
             </label>
@@ -51,14 +53,15 @@ function AddPages() {
                 value={pageRoute}
                 onChange={(event) => setPageRoute(event.target.value)}
                 required
-                className="focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="border-gray-300 px-2 border-2 focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
               />
             </div>
           </div>
+          
           <div>
             <label
               htmlFor="page-title"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-black"
             >
               Page Title
             </label>
@@ -70,14 +73,33 @@ function AddPages() {
                 value={pageTitle}
                 onChange={(event) => setPageTitle(event.target.value)}
                 required
-                className="focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="border-gray-300 px-2 border-2 focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              />
+            </div>
+          </div>
+          <div className="text-black">
+            <label
+              htmlFor="page-route"
+              className="block text-sm font-medium text-black-300"
+            >
+              Subheader
+            </label>
+            <div className="mt-1">
+              <input
+                type="text"
+                name="page-route"
+                id="page-route"
+                value={subheader}
+                onChange={(event) => setSubHeader(event.target.value)}
+                required
+                className="border-gray-300 px-2 border-2 focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md"
               />
             </div>
           </div>
           <div>
             <label
               htmlFor="page-content"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-black-300"
             >
               Page Content
             </label>
@@ -89,7 +111,8 @@ function AddPages() {
                 onChange={(event) => setPageContent(event.target.value)}
                 required
                 rows="5"
-                className="focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                // cols="100"
+                className="border-gray-300 h-60 px-2 border-2 focus:ring-indigo-500 py-2 text-black focus:border-indigo-500 block w-full shadow-sm sm:text-sm  rounded-md"
               ></textarea>
             </div>
           </div>

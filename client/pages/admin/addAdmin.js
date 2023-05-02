@@ -7,41 +7,45 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
 import { BiSearch } from "react-icons/bi";
+import { redirect } from "next/dist/server/api-utils";
+// import { Router } from "next/router";
+import { useRouter } from "next/router";
 
 const addAdmin = () => {
+  const router = useRouter();
   const [adminEmail, setAdminEmail] = useState("");
-  const [admins, setAdmins] = useState([]);
+  const [adminName, setAdminName] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
+  const [adminRole, setAdminRole] = useState("");
+  const [adminStatus, setAdminStatus] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const body = {
+        username: adminName,
+        email: adminEmail,
+        password: adminPassword,
+        role: adminRole,
+        status: adminStatus,
+      };
       const response = await axios.post(
         "http://localhost:4800/api/v1/admin/",
-        JSON.stringify({ email: adminEmail }),
+        JSON.stringify(body),
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       setAdminEmail("");
       alert("Admin added successfully");
+      router.push("/admin/users");
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:4800/api/v1/admin/")
-      .then((res) => {
-        setAdmins(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <Sidebar>
@@ -62,70 +66,120 @@ const addAdmin = () => {
         </form>
       </div>
       {/* Search bar end */}
-      <div className="flex justify-center  mt-20 bg-black">
+      <div className="flex p-10">
         <form
+          autoComplete="off"
           onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-lg shadow-lg"
+          className="bg-white p-8 rounded-lg"
         >
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            Add Admin Email
-          </h1>
-          <div className="mb-4">
+          <div className="flex justify-between">
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">Add Admin</h1>
+            <button
+              type="submit"
+              className=" border-2 mb-4 absolute right-10 text-black px-4 py-2 rounded-2xl hover:bg-gray-400"
+            >
+              Add User
+            </button>
+          </div>
+          <div className="mb-4  flex">
+            <label
+              htmlFor="name"
+              className=" w-32 text-gray-500 mt-2 font-bold mt-1"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={adminName}
+              placeholder="Enter name"
+              className="w-full border-b-2 border-gray-400  text-gray-800 p-2  focus:outline-none focus:border-blue-500"
+              required
+              onChange={(e) => setAdminName(e.target.value)}
+            />
+          </div>
+          <div className="mb-4 flex">
+            <label
+              htmlFor="email"
+              className="block w-32 text-gray-500 font-bold mt-1"
+            >
+              Email
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               value={adminEmail}
               placeholder="Enter email"
-              className="w-full border border-gray-400 text-gray-800 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full bg-white border-gray-400 text-gray-800 p-2 border-b-2 focus:outline-none focus:border-blue-500"
               required
               onChange={(e) => setAdminEmail(e.target.value)}
             />
           </div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          <div className="mb-4 flex">
+            <label
+              htmlFor="password"
+              className="block w-32 text-gray-500 font-bold mt-1"
             >
-              Add Admin
-            </button>
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={adminPassword}
+              placeholder="Enter password"
+              className="w-full  border-gray-400  text-gray-800 p-2 border-b-2 focus:outline-none focus:border-blue-500 bg-white"
+              required
+              onChange={(e) => setAdminPassword(e.target.value)}
+            />
           </div>
+          <div className="mb-4 flex">
+            <label
+              htmlFor="role"
+              className="block w-32 text-gray-500 font-bold mt-1"
+            >
+              Role
+            </label>
+            <select
+              id="role"
+              name="role"
+              value={adminRole}
+              className="w-full  border-gray-400  text-gray-800 p-2 border-b-2 focus:outline-none focus:border-blue-500"
+              required
+              onChange={(e) => setAdminRole(e.target.value)}
+            >
+              <option value="">Select role</option>
+              <option value="admin">Admin</option>
+              <option value="manager">Manager</option>
+              <option value="supervisor">Supervisor</option>
+            </select>
+          </div>
+          <div className="mb-4 flex">
+            <label
+              htmlFor="status"
+              className="block w-32 text-gray-500 font-bold mt-1"
+            >
+              Status
+            </label>
+            <select
+              id="status"
+              name="status"
+              value={adminStatus}
+              className="w-full  border-gray-400  text-gray-800 p-2 border-b-2 focus:outline-none focus:border-blue-500"
+              required
+              onChange={(e) => setAdminStatus(e.target.value)}
+            >
+              <option value="">Select status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          {/* <div className="flex justify-center"> */}
+
+          {/* </div> */}
         </form>
-      </div>
-
-      <div className="shadow w-1/2 mt-20 mx-auto overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table className="min-w-full  divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Admin List
-              </th>
-
-              {/* <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Action
-                </th> */}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {admins.map((admin) => (
-              <tr>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
-                    {admin.email}
-                  </div>
-                </td>
-                {/* <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                            {partEntry.brandName}
-                            </div>
-                        </td> */}
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </Sidebar>
   );

@@ -48,7 +48,7 @@ const carsData = () => {
               <tbody className="">
                 <tr className="cursor-pointer">
                   <td className="py-3 text-left">772</td>
-                  <td className="py-3  text-left">Mackbook</td>
+                  <td className="py-3  text-left">BMW</td>
                   <td className="py-3  text-left">18 June</td>
                   <td className="py-3  text-left">$1.05</td>
                   <td className="py-3  text-left">$1.05</td>
@@ -56,7 +56,7 @@ const carsData = () => {
                 </tr>
                 <tr className="cursor-pointer">
                   <td className="py-3  text-left">772</td>
-                  <td className="py-3  text-left">Mackbook</td>
+                  <td className="py-3  text-left">Tesla</td>
                   <td className="py-3  text-left">18 June</td>
                   <td className="py-3  text-left">$1.05</td>
                   <td className="py-3  text-left">$1.05</td>
@@ -64,7 +64,7 @@ const carsData = () => {
                 </tr>
                 <tr className="cursor-pointer">
                   <td className="py-3  text-left">772</td>
-                  <td className="py-3  text-left">Mackbook</td>
+                  <td className="py-3  text-left">Audi</td>
                   <td className="py-3  text-left">18 June</td>
                   <td className="py-3  text-left">$1.05</td>
                   <td className="py-3  text-left">$1.05</td>
