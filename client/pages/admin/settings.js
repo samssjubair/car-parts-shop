@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
@@ -13,6 +13,26 @@ function settings() {
   const [logoFile, setLogoFile] = useState(null);
   const [title,setTitle] = useState("");
   const [favicon,setFavicon] = useState(null);
+  const [metaDescription,setMetaDescription] = useState("");
+
+  useEffect(() => {
+    axios.get('http://localhost:4800/api/v1/metadescription/')
+    .then(res=>{
+      // console.log(res.data);
+      setMetaDescription(res.data.description);
+    })
+  }, [])
+
+  const handleDescriptionBlur=(e)=>{
+    // e.preventDefault();
+    // console.log(e.target.value);
+    axios.put('http://localhost:4800/api/v1/metadescription/',{
+      description:e.target.value
+    })
+    .then(res=>{
+      console.log(res);
+    })
+  }
 
 
   const handleTitleBlur=(e)=>{
@@ -48,6 +68,8 @@ function settings() {
       console.error(error);
     }
   };
+
+
 
   const handleFaviconUpload = async (e) => {
     // console.log("mama fav")
@@ -214,6 +236,9 @@ function settings() {
               <div className="mt-7">
                 <label className="ml-4">SEO Description</label>
                 <textarea
+                value={metaDescription}
+                onChange={(e) => setMetaDescription(e.target.value)}
+                onBlur={handleDescriptionBlur}
                   type="text"
                   placeholder="Here is the text space for seo description for the site where admin can write free text"
                   className="pr-3 pl-5 h-64 w-full rounded-md text-sm"

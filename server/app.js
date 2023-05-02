@@ -8,6 +8,7 @@ const logoRouter=  require('./routes/logo.route');
 const faviconRouter=  require('./routes/favicon.route');
 const adminRouter=  require('./routes/admin.route');
 const sitenameRouter=  require('./routes/sitename.route');
+const metaDescription= require('./routes/metaDescription.route');
 
 app.use(express.json());
 app.use(cors());
@@ -34,5 +35,6 @@ app.use('/api/v1/logo',logoRouter);
 app.use('/api/v1/favicon',faviconRouter);
 app.use('/api/v1/admin',adminRouter);
 app.use('/api/v1/sitename',sitenameRouter);
+app.use('/api/v1/metadescription',metaDescription);
 
 module.exports =app;
