@@ -35,8 +35,8 @@ body {
 }
 
 .slider-img{
-  width: 1200px;
-  height: 500px;
+  /* width: 1200px; */
+  max-height: 500px;
 }
 
 .car-form-bg-color{
