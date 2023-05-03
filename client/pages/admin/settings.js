@@ -171,7 +171,7 @@ function settings() {
             className="bg-gray-100 rounded-md mt-10 px-4 py-10"
           >
             <div className="">
-              <div className="flex justify-between">
+              <div className="flex justify-between pb-4">
                 <div>
                   <h1 className="text-2xl font-bold">Settings</h1>
                 </div>

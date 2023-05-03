@@ -26,7 +26,10 @@ const carsData = () => {
             </div>
             {/* Search bar end */}
 
-            <div className="mt-5 bg-gray-100 h-screen px-4 rounded-xl">
+            <div
+              style={{ height: "85vh" }}
+              className="mt-5 bg-gray-100 px-4 rounded-xl"
+            >
               <div className=" flex pt-6 justify-between">
                 <div>
                   <h1 className="text-xl mb-4">Cars Data</h1>

@@ -29,11 +29,17 @@ const pages = () => {
               className="pr-3 pl-10 w-screen py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none right-2 ring-gray-300 focus:ring-gray-500 bg-gray-100 focus:ring-2"
             />
           </div>
-          <div>
-            <div className="bg-white shadow-md rounded my-6">
+          <div className="bg-gray-200 shadow-md rounded my-6">
+            <div className="flex justify-between px-4 items-center mb-4">
+              <h2 className="text-2xl font-bold">Pages</h2>
+              <button className="px-4 py-2 text-black border-2 mt-2 border-gray-300 rounded-3xl  hover:bg-gray-300">
+                <Link href="/admin/addPages">Add Page</Link>
+              </button>
+            </div>
+            <div>
               <table className="w-full table-auto">
                 <thead>
-                  <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                  <tr className=" text-gray-600 uppercase text-sm leading-normal">
                     <th className="py-3 px-6 text-left">Title</th>
                     <th className="py-3 px-6 text-left">URL</th>
                     <th className="py-3 px-6 text-center">Status</th>
@@ -83,11 +89,6 @@ const pages = () => {
                   ))}
                 </tbody>
               </table>
-              <div className="flex justify-start p-4">
-                <button className="border-2 border-gray-500 text-gray-500 rounded-md px-4 py-2">
-                  <Link href="/admin/addPages">Add Page</Link>
-                </button>
-              </div>
             </div>
           </div>
         </div>

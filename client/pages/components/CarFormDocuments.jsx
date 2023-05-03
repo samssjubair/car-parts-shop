@@ -259,7 +259,7 @@ const CarFormDocuments = () => {
           <div style={{paddingTop: '2px'}} className="p-6 md:pt-6 sm:pt-8 space-y-4 md:space-y-6 sm:p-8">
             <form
               onSubmit={handleSubmit}
-              className="space-y-4 md:space-y-6 lg:space-y-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-5 gap-4"
+              className="space-y-4 md:space-y-6 lg:space-y-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-5 gap-4 pt-4"
               action="#"
             >
               <div className="md:mt-6 lg:mt-8 dd-parent">
