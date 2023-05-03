@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { BiSearch } from "react-icons/bi";
+import axios from "axios";
 
 const leads = () => {
   const [partEntries, setPartEntries] = useState([]);
@@ -10,6 +11,16 @@ const leads = () => {
       .then((res) => res.json())
       .then((data) => setPartEntries(data.data));
   }, []);
+
+  const handleStatusChange=(id,status)=>{
+    axios.put(`${process.env.api}/entries/${id}`,{status:status})
+    .then((res)=>{
+      alert("Status changed successfully");
+      window.location.reload();
+    })
+    .catch((err)=>console.log(err))
+
+  }
   return (
     <Sidebar className="">
       <div className=" grid grid-cols-1 mt-5">
@@ -44,7 +55,7 @@ const leads = () => {
                   <h1>Leads</h1>
                 </div>
                 <div>
-                  <button className="leads-btn hover:bg-slate-300">Export</button>
+                  <button className="leads-btn hover:bg-slate-300 fixed right-10">Export</button>
                 </div>
               </div>
             </div>
@@ -120,6 +131,12 @@ const leads = () => {
                   >
                     City
                   </th>
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -181,6 +198,21 @@ const leads = () => {
                         {partEntry.deliveryAddress}
                       </div>
                     </td>
+                    <td className="px-4 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium b text-gray-900">
+                      <select
+                        className="border-2 border-gray-500 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        value={partEntry.status}
+                        onChange={(e) =>
+                          handleStatusChange(partEntry._id, e.target.value)
+                        }
+                      >
+                        <option value="new">New</option>
+                        <option value="contracting">Contracting</option>
+                        <option value="lost">Lost</option>
+                      </select>
+                    </div>
+                  </td>
                   </tr>
                 ))}
               </tbody>

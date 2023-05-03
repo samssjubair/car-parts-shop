@@ -9,3 +9,10 @@ module.exports.saveEntryService= async (data)=>{
     const entry = await Entry.create(data);
     return entry;
 }
+
+module.exports.updateEntryByIdService= async (id, data)=>{
+    const result= await Entry.updateOne({_id: id}, {$set: data},{
+        runValidators: true
+    });
+    return result;
+}

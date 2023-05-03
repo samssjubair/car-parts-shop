@@ -1,4 +1,4 @@
-const { saveEntryService, getEntryService } = require("../services/entry.services");
+const { saveEntryService, getEntryService, updateEntryByIdService } = require("../services/entry.services");
 
 
 module.exports.getAllEntries = async (req, res) => {
@@ -64,5 +64,23 @@ module.exports.saveEntry= async (req, res) => {
             message: "Error saving entry",
             data: error.message
          });
+    }
+}
+
+module.exports.updateEntryById= async (req, res) => {
+    try {
+        const { id } = req.params;
+        const entry = await updateEntryByIdService(id, req.body);
+        res.status(200).json({
+            success: true,
+            message: "Entry updated successfully",
+            data: entry
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Error updating entry",
+            error: error.message
+        })
     }
 }

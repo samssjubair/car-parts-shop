@@ -62,8 +62,8 @@ const entrySchema=mongoose.Schema({
     },
     status: {
         type: String,
-        default: "pending",
-        enum: ["pending","processing", "delivered", "rejected"],
+        default: "new",
+        enum: ["new","contracting", "lost"],
         // required: true
     }
 
