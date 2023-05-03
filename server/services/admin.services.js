@@ -16,3 +16,13 @@ module.exports.getUserByEmail = async (email) => {
     return user;
 }
 
+module.exports.updateAdminService = async (id, data) => {
+    const user= await Admin.updateOne({ _id: id }, data);
+    return user;
+}
+
+module.exports.deleteAdminService = async (id) => {
+    const user= await Admin.deleteOne({ _id: id });
+    return user;
+}
+

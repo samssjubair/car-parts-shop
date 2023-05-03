@@ -168,7 +168,7 @@ function settings() {
                   <h1 className="text-2xl font-bold">Settings</h1>
                 </div>
                 <div>
-                  <button className="leads-btn hover:bg-slate-300">Save</button>
+                  <button onClick={()=>window.location.reload()} className="leads-btn hover:bg-slate-300">Save</button>
                 </div>
               </div>
               <div>
@@ -207,7 +207,7 @@ function settings() {
                           />
                         </svg>
                         <span className="mt-2 text-black text-base leading-normal">
-                          Select a file
+                          Select an image
                         </span>
                         <input
                           type="file"
@@ -250,7 +250,7 @@ function settings() {
                           />
                         </svg>
                         <span className="mt-2 text-black text-base leading-normal">
-                          Select a file
+                          Select an ico file
                         </span>
                         <input
                           type="file"

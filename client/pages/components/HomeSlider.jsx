@@ -8,15 +8,15 @@ import slider3 from "../asset/slider-3.jpg"
 
 const HomeSlider = () => {
   return (
-    <Carousel showThumbs={false}  infiniteLoop={true} autoPlay={true}>
+    <Carousel dynamicHeight={false} showThumbs={false}  infiniteLoop={true} autoPlay={true}>
         <div>
-          <Image src={slider1} alt="" className="slider-img"/>
+          <Image src={slider1} alt="" className="slider-img rounded-xl"/>
         </div>
         <div>
-          <Image src={slider2} alt="" className="slider-img"/>
+          <Image src={slider2} alt="" className="slider-img rounded-xl"/>
         </div>
         <div>
-          <Image src={slider3} alt="" className="slider-img"/>
+          <Image src={slider3} alt="" className="slider-img rounded-xl"/>
         </div>
     </Carousel>
   )

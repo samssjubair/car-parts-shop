@@ -36,7 +36,8 @@ body {
 
 .slider-img{
   /* width: 1200px; */
-  max-height: 500px;
+  max-height: 400px;
+  min-height: 200px;
 }
 
 .car-form-bg-color{
@@ -166,4 +167,8 @@ body {
   padding: .5em 0;
   border: none;
   outline: none;
+}
+
+.w-ads{
+  width: 96%;
 }

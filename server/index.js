@@ -5,7 +5,7 @@ const port=process.env.PORT || 4999;
 
 const app=require('./app');
 
-mongoose.connect(process.env.DB_LOCAL).then(()=>{
+mongoose.connect(process.env.DB_REMOTE).then(()=>{
     console.log(`DB connection established`.red.bold);
 })
 

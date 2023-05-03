@@ -21,12 +21,13 @@ const adminCreatedPage = (props) => {
                 <Navigation />
             </div>
             
-            <HomeSlider/>
+            {/* <HomeSlider/> */}
 
 
 
             <div style={{height: '65vh'}}  className="container  mx-auto py-4">
                 <div className='mb-10'>
+
                     <h1 className="text-4xl font-bold mb-4 uppercase text-center">{page.title}</h1>
                     <h3 className='text-2xl text-center'>
                         {page.subheader}

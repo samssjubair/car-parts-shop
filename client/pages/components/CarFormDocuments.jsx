@@ -249,8 +249,8 @@ const CarFormDocuments = () => {
 
   return (
     <div>
-      <div className="flex justify-center mt-16">
-        <div className="w-11/12 ">
+      <div className="flex justify-center mt-4">
+        <div className=" w-11/12 ">
           <h1 className="text-xl text-black font-bold">Search by Vehicle</h1>
           <p className="text-slate-700 text-sm">Filter your result by entering your vehicle to ensure you find the parts that fit</p>
         </div>
@@ -397,7 +397,7 @@ const CarFormDocuments = () => {
                     Select part type
                   </option>
                   <option value="gcc">GCC</option>
-                  <option value="american">Electrical</option>
+                  <option value="american">American</option>
                   <option value="japanese">Japanese</option>
                   <option value="others">Others</option>
                 </select>

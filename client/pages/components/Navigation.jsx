@@ -48,7 +48,7 @@ const Navigation = () => {
       {/* Navigation */}
       <header className="bg-white">
             <nav
-              className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+              className="mx-auto flex  items-center justify-between  py-5 "
               aria-label="Global"
             >
               <div className="flex lg:flex-1">
@@ -86,13 +86,23 @@ const Navigation = () => {
               </Popover.Group>
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <Link
-                  href="tel: +1234567890"
+                  href="tel: +971 55 516 3932"
                   className="w-10 h-10 bg-lime-500 rounded-full "
                 >
                   <BsWhatsapp className="w-5 h-5 navbar-icon"/>
                 </Link>
               </div>
             </nav>
+
+            {/* <div className="py-6">
+                      <Link
+                        href="#"
+                        className="-mx-3 block  px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 w-10 h-10 bg-lime-500 rounded-full"
+                      >
+                        <BsWhatsapp className="w-5 h-5"/>
+                      </Link>
+                    </div> */}
+            
             <Dialog
               as="div"
               className="lg:hidden"
@@ -100,11 +110,13 @@ const Navigation = () => {
               onClose={setMobileMenuOpen}
             >
               <div className="fixed inset-0 z-10" />
+              
               <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div className="flex items-center justify-between">
                   <a href="#" className="-m-1.5 p-1.5">
                     <h1 className="text-gray-900">CarPartz</h1>
                   </a>
+                  
                   <button
                     type="button"
                     className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -117,33 +129,29 @@ const Navigation = () => {
                 <div className="mt-6 flow-root">
                   <div className="-my-6 divide-y divide-gray-500/10">
                     <div className="space-y-2 py-6">
-                      <a
-                        href="#"
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Home
-                      </a>
-                      <a
-                        href="#"
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        About Us
-                      </a>
-                      <a
-                        href="#"
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Blog
-                      </a>
+                      {
+                        allRoutes.map((route,ind) => {
+                          return (
+                            // <Link
+                            //   key={ind}
+                            //   href= {`/${route}`}
+                            //   className="text-base capitalize font-semibold leading-6 text-gray-900"
+                            // >
+                            //   {route}
+                            // </Link>
+                            <Link
+                            key={ind}
+                             href= {`/${route}`}
+                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          >
+                            {route}
+                          </Link>
+                          )
+                        })
+                      }
+                     
                     </div>
-                    <div className="py-6">
-                      <Link
-                        href="#"
-                        className="-mx-3 block  px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 w-10 h-10 bg-lime-500 rounded-full"
-                      >
-                        <BsWhatsapp className="w-5 h-5"/>
-                      </Link>
-                    </div>
+                    
                   </div>
                 </div>
               </Dialog.Panel>

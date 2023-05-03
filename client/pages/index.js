@@ -17,16 +17,16 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <div className="bg-white">
-      <div>
+      <div className="w-11/12 mx-auto">
         <Navigation />
       </div>
-      <div>
+      <div className="w-11/12 mx-auto">
         <HomeSlider />
       </div>
       <div className="flex text-black justify-center">
-        <div className=" w-11/12 ">
+        <div className="w-11/12 ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-9 pb-4">
-            <div className="flex lg:justify-center">
+            <div className="flex lg:justify-start">
               <div>
                 <Image src={serviceIcon1} alt="" className="mr-4" />
               </div>
@@ -57,7 +57,7 @@ export default function Home() {
                 <p className="text-slate-500 text-sm">3 days open purchase</p>
               </div>
             </div>
-            <div className="flex lg:justify-center">
+            <div className="flex lg:justify-end  ">
               <div>
                 <Image src={serviceIcon4} alt="" className="mr-4" />
               </div>

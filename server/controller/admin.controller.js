@@ -1,4 +1,4 @@
-const { saveAdminService, getAllAdminsService, getUserByEmail } = require("../services/admin.services");
+const { saveAdminService, getAllAdminsService, getUserByEmail, deleteAdminService, updateAdminService } = require("../services/admin.services");
 // console.log('admin controller')
 
 module.exports.saveAdminController = async (req, res) => {
@@ -14,6 +14,44 @@ module.exports.saveAdminController = async (req, res) => {
         res.status(400).json({
             success: false,
             message: "Error saving admin",
+            data: error.message
+        })
+    }
+}
+
+module.exports.updateAdminController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const admin = await updateAdminService(id, req.body);
+        res.status(200).json({
+            success: true,
+            message: "Admin updated successfully",
+            data: admin
+        });
+        
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Error updating admin",
+            data: error.message
+        })
+    }
+}
+
+module.exports.deleteAdminController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const admin = await deleteAdminService(id);
+        res.status(200).json({
+            success: true,
+            message: "Admin deleted successfully",
+            data: admin
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Error deleting admin",
             data: error.message
         })
     }
