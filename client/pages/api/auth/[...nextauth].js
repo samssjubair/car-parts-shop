@@ -24,6 +24,7 @@ export const authOptions = {
                       }
                     );
                     const data = response.data;
+                    // console.log(data,"hola")
 
                     if (data.user) {
                         return {
