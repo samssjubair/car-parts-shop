@@ -251,7 +251,7 @@ const CarFormDocuments = () => {
     <div>
       <div className="flex justify-center mt-4">
         <div className=" w-11/12 ">
-          <h1 className="text-xl text-black font-bold">Search by Vehicle</h1>
+          <h1 className="text-xl text-black font-bold mt-6">Search by Vehicle</h1>
           <p className="text-slate-700 text-sm">Filter your result by entering your vehicle to ensure you find the parts that fit</p>
         </div>
       </div>
