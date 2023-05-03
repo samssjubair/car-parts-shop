@@ -9,7 +9,7 @@ import { BiSearch } from "react-icons/bi";
 const pages = () => {
   const [pages, setPages] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:4800/api/v1/pages").then((response) => {
+    axios.get(`${process.env.api}/pages`).then((response) => {
       setPages(response.data.data);
     });
   }, []);

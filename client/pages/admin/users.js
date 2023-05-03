@@ -11,7 +11,7 @@ const users = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4800/api/v1/admin/")
+      .get(`${process.env.api}/admin/`)
       .then((res) => {
         setAdmins(res.data.data);
       })

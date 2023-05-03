@@ -28,7 +28,7 @@ function EditPage() {
     console.log(data,pageId)
     try {
       const response = await axios.put(
-        `http://localhost:4800/api/v1/pages/editPage/${pageId}`,
+        `${process.env.api}/pages/editPage/${pageId}`,
         data
       );
       // console.log(pageId);

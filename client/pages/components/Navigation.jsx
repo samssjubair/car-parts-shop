@@ -23,7 +23,7 @@ const Navigation = () => {
     const [logoUrl, setLogoUrl] = useState('');
 
     useEffect(() => {
-      fetch('http://localhost:4800/api/v1/logo')
+      fetch(`${process.env.api}/logo`)
         .then(response => response.blob())
         .then(blob => {
           const url = URL.createObjectURL(blob);
@@ -32,7 +32,7 @@ const Navigation = () => {
     }, []);
 
     useEffect(() => {
-        axios.get("http://localhost:4800/api/v1/pages").then((res) => {
+        axios.get(`${process.env.api}/pages`).then((res) => {
             setAllAdminCreatedRoute(res.data.data);
         });
     }, []);

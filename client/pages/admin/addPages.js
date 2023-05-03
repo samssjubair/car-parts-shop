@@ -24,7 +24,7 @@ function AddPages() {
     // console.log(data)
     try {
       const response = await axios.post(
-        "http://localhost:4800/api/v1/pages",
+        `${process.env.api}/pages`,
         data
       );
       console.log(response.data);

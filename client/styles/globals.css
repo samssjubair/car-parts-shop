@@ -125,9 +125,10 @@ body {
 }
 
 .tags-input-container{
-  border: 1px solid rgb(194, 192, 192);
+  /* border: 1px solid rgb(194, 192, 192); */
   padding: .5em;
-  border-radius: 3px;
+  border-radius: 10px;
+  background-color: white;
   /* width: min(80vw, 600px); */
   width: 100%;
   margin-top: 0;

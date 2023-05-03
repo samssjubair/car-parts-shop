@@ -18,7 +18,7 @@ function settings() {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4800/api/v1/metatag/").then((res) => {
+    axios.get(`${process.env.api}/metatag/`).then((res) => {
       // console.log(res.data.tag)
       // setKeywords(res.data.tag)
       const keywords = res.data.tag.split(",");
@@ -29,7 +29,7 @@ function settings() {
   const saveMetaTag = (tg) => {
     // console.log("tgggg", tg.join(","));
     axios
-      .put("http://localhost:4800/api/v1/metatag/", {
+      .put(`${process.env.api}/metatag/`, {
         tag: tg.join(", "),
       })
       .then((res) => {
@@ -68,7 +68,7 @@ function settings() {
   // };
 
   useEffect(() => {
-    axios.get("http://localhost:4800/api/v1/metadescription/").then((res) => {
+    axios.get(`${process.env.api}/metadescription/`).then((res) => {
       // console.log(res.data);
       setMetaDescription(res.data.description);
     });
@@ -78,7 +78,7 @@ function settings() {
     // e.preventDefault();
     // console.log(e.target.value);
     axios
-      .put("http://localhost:4800/api/v1/metadescription/", {
+      .put(`${process.env.api}/metadescription/`, {
         description: e.target.value,
       })
       .then((res) => {
@@ -90,7 +90,7 @@ function settings() {
     // e.preventDefault();
     // console.log(e.target.value);
     axios
-      .patch("http://localhost:4800/api/v1/sitename/", {
+      .patch(`${process.env.api}/sitename/`, {
         appName: e.target.value,
       })
       .then((res) => {
@@ -109,7 +109,7 @@ function settings() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4800/api/v1/logo/",
+        `${process.env.api}/logo/`,
         formData
       );
       // console.log(response.data);
@@ -129,7 +129,7 @@ function settings() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4800/api/v1/favicon/",
+        `${process.env.api}/favicon/`,
         formData
       );
       // console.log(response.data);

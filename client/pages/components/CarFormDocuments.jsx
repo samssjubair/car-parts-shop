@@ -3,6 +3,7 @@ const axios = require("axios");
 import emailjs from '@emailjs/browser';
 
 const CarFormDocuments = () => {
+  console.log(process.env.customKey)
   const [allBrand, setAllBrand] = useState([]);
   const [brand, setBrand] = useState("");
   const [brandSelected, setBrandSelected] = useState(false);
@@ -17,7 +18,7 @@ const CarFormDocuments = () => {
       method: "GET",
       url: "https://car-data.p.rapidapi.com/cars/makes",
       headers: {
-        "X-RapidAPI-Key": "8a23d0a514mshe967b025d67bacap17893cjsna0dd77ac4153",
+        "X-RapidAPI-Key": process.env.carBrandApiKey,
         "X-RapidAPI-Host": "car-data.p.rapidapi.com",
       },
     };
@@ -64,7 +65,7 @@ const CarFormDocuments = () => {
       params: { sort: "id", direction: "asc", verbose: "yes" },
       headers: {
         // 'content-type': 'application/octet-stream',
-        "X-RapidAPI-Key": "cca3027ed2mshab6215589fddd89p1d62f6jsn5d3af0d08feb",
+        "X-RapidAPI-Key": process.env.carModelApiKey,
         "X-RapidAPI-Host": "car-api2.p.rapidapi.com",
       },
     };
@@ -197,7 +198,7 @@ const CarFormDocuments = () => {
       deliveryAddress: address,
     };
     // console.log(event);
-    fetch("http://localhost:4800/api/v1/entries", {
+    fetch(`${process.env.api}/entries`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

@@ -17,7 +17,7 @@ export const authOptions = {
                 try {
                     // Make an API request to verify the user's credentials
                     const response = await axios.post(
-                      "http://localhost:4800/api/v1/admin/login",
+                        `${process.env.api}/admin/login`,
                       {
                         email: credentials.email,
                         password: credentials.password,
