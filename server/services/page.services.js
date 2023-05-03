@@ -27,3 +27,8 @@ module.exports.updatePageByIdService= async (id, data)=>{
     });
     return result;
 }
+
+module.exports.deletePageByIdService= async (id)=>{
+    const result= await Page.deleteOne({_id: id});
+    return result;
+}

@@ -66,7 +66,7 @@ function AddPages() {
                   type="submit"
                   className=" border-2 mb-4 absolute right-10 text-black px-4 py-2 rounded-2xl hover:bg-gray-400"
                 >
-                  save
+                  Save
                 </button>
               </div>
               <div>

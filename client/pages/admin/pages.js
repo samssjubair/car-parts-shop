@@ -14,6 +14,14 @@ const pages = () => {
     });
   }, []);
 
+  const handleDelete=(id)=>{
+    axios.delete(`${process.env.api}/pages/${id}`).then((response) => {
+        // setPages(response.data.data);
+        alert('Page deleted successfully');
+        window.location.reload();
+        });
+    }
+
   return (
     <Sidebar>
       <div className=" grid grid-cols-1 mt-10">
@@ -86,6 +94,15 @@ const pages = () => {
                             Edit 
                           </Link>
                         </button>
+                        <button
+                          className="text-black hover:bg-gray-300  font-bold py-2 px-4 rounded"
+                          onClick={() => handleDelete(page._id)}
+                        >
+                          {/* <Link href={`/admin/editpage/${page._id}`}> */}
+                            Delete 
+                          {/* </Link> */}
+                        </button>
+
                       </td>
                     </tr>
                   ))}

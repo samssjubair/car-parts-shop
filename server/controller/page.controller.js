@@ -1,4 +1,4 @@
-const { savePageService, getPageByNameService, updatePageByIdService } = require("../services/page.services");
+const { savePageService, getPageByNameService, updatePageByIdService, deletePageByIdService } = require("../services/page.services");
 
 
 module.exports.savePages = async (req, res) => {
@@ -50,6 +50,24 @@ module.exports.updatePageById= async (req, res) => {
         res.status(400).json({
             success: false,
             message: "Error updating page",
+            error: error.message
+        })
+    }
+}
+
+module.exports.deletePageById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const page = await deletePageByIdService(id);
+        res.status(200).json({
+            success: true,
+            message: "Page deleted successfully",
+            data: page
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Error deleting page",
             error: error.message
         })
     }
