@@ -68,33 +68,6 @@ const Navigation = () => {
                 </button>
               </div>
               <Popover.Group className="hidden lg:flex lg:gap-x-12">
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Home
-                </Link>
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  About Us
-                </Link>
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Blog
-                </Link>
-              <Link
-                  href="/"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Contact 
-                </Link>
-                {
-                  console.log(allRoutes)
-                }
                 {
                   allRoutes.map((route,ind) => {
                     return (
@@ -113,7 +86,7 @@ const Navigation = () => {
               </Popover.Group>
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <Link
-                  href=""
+                  href="tel: +1234567890"
                   className="w-10 h-10 bg-lime-500 rounded-full "
                 >
                   <BsWhatsapp className="w-5 h-5 navbar-icon"/>

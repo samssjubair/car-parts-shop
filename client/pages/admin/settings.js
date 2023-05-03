@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
@@ -9,8 +9,100 @@ import { signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
 import { BiSearch } from "react-icons/bi";
 
+
 function settings() {
   const [logoFile, setLogoFile] = useState(null);
+  const [title,setTitle] = useState("");
+  const [favicon,setFavicon] = useState(null);
+  const [metaDescription,setMetaDescription] = useState("");
+  // const [keywords, setKeywords] = useState([]);
+  const [tags, setTags] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:4800/api/v1/metatag/')
+    .then(res => {
+      // console.log(res.data.tag)
+      // setKeywords(res.data.tag)
+      const keywords = res.data.tag.split(',');
+      setTags(keywords);
+    })
+  }, [])
+
+  const saveMetaTag=(tg)=>{
+    console.log("tgggg",tg.join(','));
+    axios.put('http://localhost:4800/api/v1/metatag/',{
+      tag:tg.join(', ')
+    })
+    .then(res=>{
+      console.log(res);
+    })
+
+  }
+
+    function handleKeyDown(e){
+        // If user did not press enter key, return
+        if(e.key !== ' ' && e.key !=='Enter') return
+        // Get the value of the input
+        const value = e.target.value
+        // If the value is empty, return
+        if(!value.trim()) return
+        // Add the value to the tags array
+        setTags([...tags, value])
+        // Clear the input
+        e.target.value = ''
+        saveMetaTag([...tags, value]);
+    }
+
+    function removeTag(index){
+      setTags(tags.filter((el, i) => i !== index))
+      saveMetaTag([...tags.filter((el, i) => i !== index)]);
+  }
+
+  // const handleKeyDown = (event) => {
+  //   if (event.keyCode === 32) { // check if spacebar is pressed
+  //     event.preventDefault();
+  //     const value = event.target.value.trim(); // remove leading/trailing spaces
+  //     if (value.length > 0) { // check if input value is not empty
+  //       setKeywords((prevKeywords) => [...prevKeywords, value]); // add keyword to list
+  //       event.target.value = ""; // clear input value
+  //     }
+  //   }
+  // };
+
+  useEffect(() => {
+    axios.get('http://localhost:4800/api/v1/metadescription/')
+    .then(res=>{
+      // console.log(res.data);
+      setMetaDescription(res.data.description);
+    })
+  }, [])
+
+  const handleDescriptionBlur=(e)=>{
+    // e.preventDefault();
+    // console.log(e.target.value);
+    axios.put('http://localhost:4800/api/v1/metadescription/',{
+      description:e.target.value
+    })
+    .then(res=>{
+      console.log(res);
+    })
+  }
+
+
+  const handleTitleBlur=(e)=>{
+    // e.preventDefault();
+    // console.log(e.target.value);
+    axios.patch('http://localhost:4800/api/v1/sitename/',{
+      appName:e.target.value
+    })
+    .then(res=>{
+      console.log(res);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+
+  }
 
   const handleLogoUpload = async (e) => {
     e.preventDefault();
@@ -26,6 +118,28 @@ function settings() {
       // console.log(response.data);
       alert("Logo uploaded successfully");
       setLogoFile(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+  const handleFaviconUpload = async (e) => {
+    // console.log("mama fav")
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("favicon", favicon);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4800/api/v1/favicon/",
+        formData
+      );
+      // console.log(response.data);
+      alert("Favicon uploaded successfully");
+      setFavicon(null);
     } catch (error) {
       console.error(error);
     }
@@ -53,22 +167,24 @@ function settings() {
           </div>
           {/* Search bar end */}
           <div
-            style={{ height: "85vh" }}
+           
             className="bg-gray-100 rounded-md mt-10 px-4 py-10"
           >
             <div className="">
               <div className="flex justify-between">
                 <div>
-                  <h1>Settings</h1>
+                  <h1 className="text-2xl font-bold">Settings</h1>
                 </div>
                 <div>
-                  <button className="leads-btn hover:bg-slate-300">save</button>
+                  <button className="leads-btn hover:bg-slate-300">Save</button>
                 </div>
               </div>
               <div>
                 <label className="ml-4">Site Title</label>
                 <input
                   type="text"
+                  // value={title}
+                  onBlur={handleTitleBlur}
                   placeholder="CarPartz"
                   className="pr-3 pl-5 w-full rounded-md text-sm py-2"
                 />
@@ -119,7 +235,7 @@ function settings() {
                   </form>
                 </div>
                 <div className="">
-                  <form onSubmit={handleLogoUpload} className="">
+                  <form onSubmit={handleFaviconUpload} className="">
                     <label
                       htmlFor="logo-upload"
                       className="mb-4 text-xl font-medium"
@@ -128,7 +244,7 @@ function settings() {
                     </label>
                     <div className="flex">
                       <label
-                        htmlFor="logo-upload"
+                        htmlFor="favicon-upload"
                         className="flex flex-col items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
                       >
                         <svg
@@ -148,9 +264,9 @@ function settings() {
                         </span>
                         <input
                           type="file"
-                          id="logo-upload"
+                          id="favicon-upload"
                           className="hidden"
-                          onChange={(e) => setLogoFile(e.target.files[0])}
+                          onChange={(e) => setFavicon(e.target.files[0])}
                         />
                       </label>
                     </div>
@@ -158,22 +274,55 @@ function settings() {
                       type="submit"
                       className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
                     >
-                      Upload Logo
+                      Upload Favicon
                     </button>
                   </form>
                 </div>
               </div>
-              <div className="mt-7">
-                <label className="ml-4">SEO Keywords</label>
-                <input
-                  type="text"
-                  placeholder="SEO Keywords"
-                  className="pr-3 pl-5 w-full rounded-md py-2 bg-white text-sm"
-                />
+
+              {/* <div className="flex flex-col gap-1">
+                <label htmlFor="keywords" className="font-medium text-gray-700">
+                  Keywords
+                </label>
+                <div className="relative flex flex-row-reverse">
+                  <input
+                    id="keywords"
+                    type="text"
+                    className="block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Type keywords and press space"
+                    onKeyDown={handleKeyDown}
+                  />
+                  <div className="flex flex-wrap items-center justify-start">
+                    {keywords.map((keyword, index) => (
+                      <span
+                        key={index}
+                        className="inline-block px-2 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full mr-1"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div> */}
+
+              <div className="tags-input-container">
+                  { tags.map((tag, index) => (
+                      <div className="tag-item" key={index}>
+                          <span className="text">{tag}</span>
+                          <span className="close" onClick={() => removeTag(index)}>&times;</span>
+                      </div>
+                  )) }
+                  <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="Type somthing" />
               </div>
+
+
+
               <div className="mt-7">
                 <label className="ml-4">SEO Description</label>
                 <textarea
+                value={metaDescription}
+                onChange={(e) => setMetaDescription(e.target.value)}
+                onBlur={handleDescriptionBlur}
                   type="text"
                   placeholder="Here is the text space for seo description for the site where admin can write free text"
                   className="pr-3 pl-5 h-64 w-full rounded-md text-sm"

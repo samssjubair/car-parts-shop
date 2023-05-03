@@ -80,21 +80,21 @@ const leads = () => {
                     scope="col"
                     className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Parts Required
+                    Specs
                   </th>
 
                   <th
                     scope="col"
                     className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Parts Type
+                    Parts Required
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     quantity
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -118,7 +118,7 @@ const leads = () => {
                     scope="col"
                     className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Address
+                    City
                   </th>
                 </tr>
               </thead>
@@ -155,11 +155,11 @@ const leads = () => {
                         {partEntry.requiredParts}
                       </div>
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap">
+                    {/* <td className="px-4 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
                         {partEntry.quantity}
                       </div>
-                    </td>
+                    </td> */}
                     <td className="px-4 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
                         {partEntry.name}

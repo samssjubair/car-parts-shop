@@ -29,13 +29,13 @@ const entrySchema=mongoose.Schema({
         type: String,
         required: true,
         enum: {
-            values: ["Mechanical", "Electrical", "AC", "Extras"],
+            values: ["gcc", "american", "japanese", "others"],
             message: "Please select a valid type"
         }
     },
     quantity: {
         type: Number,
-        required: true,
+        // required: true,
         min: [1, "Quantity must be more than 1"]
     },
     name: {
