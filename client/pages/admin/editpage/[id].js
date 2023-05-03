@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { authOptions } from "../../api/auth/[...nextauth]";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 import { BiSearch } from "react-icons/bi";
+import { useRouter } from "next/router";
 
-function AddPages() {
+function EditPage() {
+  const router= useRouter();
+  const pageId= router.query.id;
   const [pageRoute, setPageRoute] = useState("");
   const [pageTitle, setPageTitle] = useState("");
   const [pageContent, setPageContent] = useState("");
@@ -21,14 +24,15 @@ function AddPages() {
       content: pageContent,
       subheader: subheader,
     };
-    // console.log(data)
+
+    console.log(data,pageId)
     try {
-      const response = await axios.post(
-        "http://localhost:4800/api/v1/pages",
+      const response = await axios.put(
+        `http://localhost:4800/api/v1/pages/editPage/${pageId}`,
         data
       );
-      console.log(response.data);
-      alert("Page added successfully");
+      // console.log(pageId);
+      alert("Page edited successfully");
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +64,7 @@ function AddPages() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex justify-between">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">
-                  Add Pages
+                  Edit Page
                 </h1>
                 <button
                   type="submit"
@@ -158,10 +162,11 @@ function AddPages() {
         </div>
       </div>
     </Sidebar>
+    
   );
 }
 
-export default AddPages;
+export default EditPage;
 
 export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(

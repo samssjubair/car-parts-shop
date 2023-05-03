@@ -80,9 +80,11 @@ const pages = () => {
                       <td className="py-3 px-6 text-center">
                         <button
                           className="text-black hover:bg-gray-300  font-bold py-2 px-4 rounded"
-                          onClick={() => handleEdit(page.id)}
+                        //   onClick={() => handleEdit(page.id)}
                         >
-                          Edit
+                          <Link href={`/admin/editpage/${page._id}`}>
+                            Edit 
+                          </Link>
                         </button>
                       </td>
                     </tr>

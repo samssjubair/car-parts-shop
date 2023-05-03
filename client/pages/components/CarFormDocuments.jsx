@@ -256,13 +256,13 @@ const CarFormDocuments = () => {
       </div>
       <div className="flex justify-center home-input-field-area mt-6 mb-10">
         <div style={{backgroundColor: '#c8d8e6'}} className="w-11/12 car-form-bg-color rounded-lg shadow dark:border md:mt-0  xl:p-0 ">
-          <div style={{paddingTop: '2px'}} className="p-6 md:pt-6 sm:pt-8 space-y-4 md:space-y-6 sm:p-8">
+          <div  className="p-6 md:pt-6  sm:pt-8 space-y-4 md:space-y-6 sm:p-8">
             <form
               onSubmit={handleSubmit}
               className="space-y-4 md:space-y-6 lg:space-y-8 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-5 gap-4 pt-4"
               action="#"
             >
-              <div className="md:mt-6 lg:mt-8 dd-parent">
+              <div className="md:mt-6  lg:mt-8 dd-parent">
                 <input
                   autoComplete="off"
                   value={brand}
@@ -271,7 +271,7 @@ const CarFormDocuments = () => {
                   type="text"
                   name="brand-name"
                   id="brand-name"
-                  className="bg-white text-black border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-white align-middle text-black border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 placeholder-black  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter brand name"
                   required=""
                 />
