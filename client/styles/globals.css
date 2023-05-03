@@ -110,6 +110,12 @@ body {
   padding: 4px;
   border-radius: 25px;
 }
+.settings-btn{
+  border: 1px solid #374151;
+  width: 130px;
+  padding: 4px;
+  border-radius: 5px;
+}
 
 
 .navbar-icon{

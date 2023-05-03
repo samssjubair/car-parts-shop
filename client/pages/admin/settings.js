@@ -9,53 +9,51 @@ import { signOut } from "next-auth/react";
 import Sidebar from "../components/Sidebar";
 import { BiSearch } from "react-icons/bi";
 
-
 function settings() {
   const [logoFile, setLogoFile] = useState(null);
-  const [title,setTitle] = useState("");
-  const [favicon,setFavicon] = useState(null);
-  const [metaDescription,setMetaDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [favicon, setFavicon] = useState(null);
+  const [metaDescription, setMetaDescription] = useState("");
   // const [keywords, setKeywords] = useState([]);
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4800/api/v1/metatag/')
-    .then(res => {
+    axios.get("http://localhost:4800/api/v1/metatag/").then((res) => {
       // console.log(res.data.tag)
       // setKeywords(res.data.tag)
-      const keywords = res.data.tag.split(',');
+      const keywords = res.data.tag.split(",");
       setTags(keywords);
-    })
-  }, [])
+    });
+  }, []);
 
-  const saveMetaTag=(tg)=>{
-    console.log("tgggg",tg.join(','));
-    axios.put('http://localhost:4800/api/v1/metatag/',{
-      tag:tg.join(', ')
-    })
-    .then(res=>{
-      console.log(res);
-    })
+  const saveMetaTag = (tg) => {
+    console.log("tgggg", tg.join(","));
+    axios
+      .put("http://localhost:4800/api/v1/metatag/", {
+        tag: tg.join(", "),
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
+  function handleKeyDown(e) {
+    // If user did not press enter key, return
+    if (e.key !== " " && e.key !== "Enter") return;
+    // Get the value of the input
+    const value = e.target.value;
+    // If the value is empty, return
+    if (!value.trim()) return;
+    // Add the value to the tags array
+    setTags([...tags, value]);
+    // Clear the input
+    e.target.value = "";
+    saveMetaTag([...tags, value]);
   }
 
-    function handleKeyDown(e){
-        // If user did not press enter key, return
-        if(e.key !== ' ' && e.key !=='Enter') return
-        // Get the value of the input
-        const value = e.target.value
-        // If the value is empty, return
-        if(!value.trim()) return
-        // Add the value to the tags array
-        setTags([...tags, value])
-        // Clear the input
-        e.target.value = ''
-        saveMetaTag([...tags, value]);
-    }
-
-    function removeTag(index){
-      setTags(tags.filter((el, i) => i !== index))
-      saveMetaTag([...tags.filter((el, i) => i !== index)]);
+  function removeTag(index) {
+    setTags(tags.filter((el, i) => i !== index));
+    saveMetaTag([...tags.filter((el, i) => i !== index)]);
   }
 
   // const handleKeyDown = (event) => {
@@ -70,39 +68,38 @@ function settings() {
   // };
 
   useEffect(() => {
-    axios.get('http://localhost:4800/api/v1/metadescription/')
-    .then(res=>{
+    axios.get("http://localhost:4800/api/v1/metadescription/").then((res) => {
       // console.log(res.data);
       setMetaDescription(res.data.description);
-    })
-  }, [])
+    });
+  }, []);
 
-  const handleDescriptionBlur=(e)=>{
+  const handleDescriptionBlur = (e) => {
     // e.preventDefault();
     // console.log(e.target.value);
-    axios.put('http://localhost:4800/api/v1/metadescription/',{
-      description:e.target.value
-    })
-    .then(res=>{
-      console.log(res);
-    })
-  }
+    axios
+      .put("http://localhost:4800/api/v1/metadescription/", {
+        description: e.target.value,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
-
-  const handleTitleBlur=(e)=>{
+  const handleTitleBlur = (e) => {
     // e.preventDefault();
     // console.log(e.target.value);
-    axios.patch('http://localhost:4800/api/v1/sitename/',{
-      appName:e.target.value
-    })
-    .then(res=>{
-      console.log(res);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-
-  }
+    axios
+      .patch("http://localhost:4800/api/v1/sitename/", {
+        appName: e.target.value,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleLogoUpload = async (e) => {
     e.preventDefault();
@@ -122,8 +119,6 @@ function settings() {
       console.error(error);
     }
   };
-
-
 
   const handleFaviconUpload = async (e) => {
     // console.log("mama fav")
@@ -166,10 +161,7 @@ function settings() {
             </form>
           </div>
           {/* Search bar end */}
-          <div
-           
-            className="bg-gray-100 rounded-md mt-10 px-4 py-10"
-          >
+          <div className="bg-gray-100 rounded-md mt-10 px-4 py-10">
             <div className="">
               <div className="flex justify-between pb-4">
                 <div>
@@ -189,19 +181,25 @@ function settings() {
                   className="pr-3 pl-5 w-full rounded-md text-sm py-2"
                 />
               </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-10">
                 <div className="">
-                  <form onSubmit={handleLogoUpload} className="">
-                    <label
-                      htmlFor="logo-upload"
-                      className="mb-2 text-xl font-medium"
-                    >
-                      logo upload
-                    </label>
-                    <div className="flex">
+                  <div>
+                    <h3 className="pb-2">logo</h3>
+                  </div>
+                  <form onSubmit={handleLogoUpload} className="flex">
+                    <div>
+                      <button
+                        type="submit"
+                        className="settings-btn hover:bg-slate-300 focus:outline-none"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <div className="ml-10">
                       <label
                         htmlFor="logo-upload"
-                        className="flex flex-col items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
+                        className="flex flex-col items-center px-8 py-4 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -226,26 +224,25 @@ function settings() {
                         />
                       </label>
                     </div>
-                    <button
-                      type="submit"
-                      className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                    >
-                      Upload Logo
-                    </button>
                   </form>
                 </div>
                 <div className="">
-                  <form onSubmit={handleFaviconUpload} className="">
-                    <label
-                      htmlFor="logo-upload"
-                      className="mb-4 text-xl font-medium"
-                    >
-                      Favicon logo upload
-                    </label>
-                    <div className="flex">
+                  <div>
+                    <h3 className="pb-2">favicon</h3>
+                  </div>
+                  <form onSubmit={handleFaviconUpload} className="flex">
+                    <div>
+                      <button
+                        type="submit"
+                        className="settings-btn hover:bg-slate-300 focus:outline-none "
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <div className="ml-10">
                       <label
                         htmlFor="favicon-upload"
-                        className="flex flex-col items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
+                        className="flex flex-col items-center px-8 py-4 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -270,12 +267,6 @@ function settings() {
                         />
                       </label>
                     </div>
-                    <button
-                      type="submit"
-                      className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                    >
-                      Upload Favicon
-                    </button>
                   </form>
                 </div>
               </div>
@@ -306,26 +297,31 @@ function settings() {
               </div> */}
 
               <div className="tags-input-container">
-                  { tags.map((tag, index) => (
-                      <div className="tag-item" key={index}>
-                          <span className="text">{tag}</span>
-                          <span className="close" onClick={() => removeTag(index)}>&times;</span>
-                      </div>
-                  )) }
-                  <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="Type somthing" />
+                {tags.map((tag, index) => (
+                  <div className="tag-item " key={index}>
+                    <span className="text">{tag}</span>
+                    <span className="close" onClick={() => removeTag(index)}>
+                      &times;
+                    </span>
+                  </div>
+                ))}
+                <input
+                  onKeyDown={handleKeyDown}
+                  type="text"
+                  className="tags-input "
+                  placeholder="Type somthing"
+                />
               </div>
-
-
 
               <div className="mt-7">
                 <label className="ml-4">SEO Description</label>
                 <textarea
-                value={metaDescription}
-                onChange={(e) => setMetaDescription(e.target.value)}
-                onBlur={handleDescriptionBlur}
+                  value={metaDescription}
+                  onChange={(e) => setMetaDescription(e.target.value)}
+                  onBlur={handleDescriptionBlur}
                   type="text"
                   placeholder="Here is the text space for seo description for the site where admin can write free text"
-                  className="pr-3 pl-5 h-64 w-full rounded-md text-sm"
+                  className="pt-3 pl-5 h-64 w-full rounded-md text-sm"
                 />
               </div>
             </div>
