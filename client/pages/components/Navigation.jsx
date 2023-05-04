@@ -57,16 +57,17 @@ const Navigation = () => {
                   <img className="h-10" src={logoUrl} alt="Logo" />
                 </Link>
               </div>
-              <div className="flex lg:hidden">
+              <div className="flex">
+                <div className="flex lg:hidden">
                 <button
                   type="button"
                   className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                   onClick={() => setMobileMenuOpen(true)}
                 >
                   <span className="sr-only">Open main menu</span>
-                  <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                  <Bars3Icon className="h-10 w-12" aria-hidden="true" />
                 </button>
-              </div>
+                </div>
               <Popover.Group className="hidden lg:flex lg:gap-x-12">
                 {
                   allRoutes.map((route,ind) => {
@@ -84,13 +85,14 @@ const Navigation = () => {
                 }
                 
               </Popover.Group>
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <div className="flex lg:flex-1 lg:justify-end md:">
                 <Link
                   href="tel: +1234567890"
                   className="w-10 h-10 bg-lime-500 rounded-full "
                 >
                   <BsWhatsapp className="w-5 h-5 navbar-icon"/>
                 </Link>
+              </div>
               </div>
             </nav>
             <Dialog
@@ -107,7 +109,7 @@ const Navigation = () => {
                   </a>
                   <button
                     type="button"
-                    className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                    className="-m-2.5 rounded-md p-2.5 text-gray-700 "
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
@@ -135,14 +137,6 @@ const Navigation = () => {
                       >
                         Blog
                       </a>
-                    </div>
-                    <div className="py-6">
-                      <Link
-                        href="#"
-                        className="-mx-3 block  px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 w-10 h-10 bg-lime-500 rounded-full"
-                      >
-                        <BsWhatsapp className="w-5 h-5"/>
-                      </Link>
                     </div>
                   </div>
                 </div>
