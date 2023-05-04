@@ -14,7 +14,7 @@ const dashboard = ({ Children }) => {
   const { data: session } = useSession();
   // const userName = session?.user?.name;
 
-  console.log(session)
+  // console.log(session)
 
   // const userName=
   // console.log(partEntries)

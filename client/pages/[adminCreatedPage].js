@@ -47,7 +47,7 @@ export async function getServerSideProps(context) {
     const {adminCreatedPage} = context.query;
     // console.log("hi",adminCreatedPage);
     const res = await fetch(`${process.env.api}/pages?route=${adminCreatedPage}`);
-    console.log(res)
+    // console.log(res)
     const data = await res.json();
     // console.log(data.data)
     return {

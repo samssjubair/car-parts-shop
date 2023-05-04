@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     }
     res.json(metaDescription);
   } catch (err) {
-    console.error(err.message);
+    // console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
@@ -27,7 +27,7 @@ router.put("/", async (req, res) => {
       await metaDescription.save();
       res.json(metaDescription);
     } catch (err) {
-      console.error(err.message);
+    //   console.error(err.message);
       res.status(500).send("Server Error");
     }
   });

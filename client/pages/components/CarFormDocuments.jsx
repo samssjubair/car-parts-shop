@@ -3,7 +3,7 @@ const axios = require("axios");
 import emailjs from '@emailjs/browser';
 
 const CarFormDocuments = () => {
-  console.log(process.env.customKey)
+  // console.log(process.env.customKey)
   const [allBrand, setAllBrand] = useState([]);
   const [brand, setBrand] = useState("");
   const [brandSelected, setBrandSelected] = useState(false);
@@ -122,7 +122,7 @@ const CarFormDocuments = () => {
 
   const sendEmail = (body) => {
     // e.preventDefault();
-    console.log(body);
+    // console.log(body);
     const message=`
     Name: ${body.name}
     Email: ${body.email}
@@ -209,7 +209,7 @@ const CarFormDocuments = () => {
       .then((data) => {
         alert("Your request has been sent successfully, You will be contacted soon");
         sendEmail(body);
-        console.log("Success:", data);
+        // console.log("Success:", data);
         setBrand("");
         setYear("");
         setModel("");
@@ -226,7 +226,7 @@ const CarFormDocuments = () => {
       })
       .catch((error) => {
         alert(error);
-        console.error("Error:", error);
+        // console.error("Error:", error);
       });
   };
 

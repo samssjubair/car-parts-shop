@@ -25,7 +25,7 @@ function EditPage() {
       subheader: subheader,
     };
 
-    console.log(data,pageId)
+    // console.log(data,pageId)
     try {
       const response = await axios.put(
         `${process.env.api}/pages/editPage/${pageId}`,

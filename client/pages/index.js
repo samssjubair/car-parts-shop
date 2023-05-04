@@ -8,14 +8,22 @@ import serviceIcon1 from "../pages/asset/service-icon-1.png";
 import serviceIcon2 from "../pages/asset/service-icon-2.png";
 import serviceIcon3 from "../pages/asset/service-icon-3.png";
 import serviceIcon4 from "../pages/asset/service-icon-4.png";
+import Head from "next/head";
 
 // import { authOptions } from './api/auth/[...nextauth]'
 // import { unstable_getServerSession } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({description, metatag}) {
+  
   return (
+    <>
+    <Head>
+        {/* <link rel="icon" href={favicon} /> */}
+        <meta name="description" content={description} /> 
+        <meta name="keywords" content={metatag} /> 
+      </Head>
     <div className="bg-white">
       <div className="w-11/12 mx-auto">
         <Navigation />
@@ -148,5 +156,19 @@ export default function Home() {
         <Footer />
       </div>
     </div>
+    </>
   );
+}
+
+export async function getServerSideProps() {
+  const response= await fetch(`${process.env.api}/metadescription/`);
+  const data= await response.json();
+  const response1= await fetch(`${process.env.api}/metatag/`);
+  const data1= await response1.json();
+  return {
+    props: {
+      description: data.description,
+      metatag: data1.tag,
+    }
+  }
 }

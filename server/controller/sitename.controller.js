@@ -12,7 +12,7 @@ exports.updateAppName = async (req, res) => {
     }
     return res.status(200).json(config);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Server Error');
   }
 };
@@ -25,7 +25,7 @@ exports.getAppName = async (req, res) => {
         }
         return res.status(200).json(config);
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(500).send('Server Error');
     }
     }

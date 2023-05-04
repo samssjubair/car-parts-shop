@@ -27,7 +27,7 @@ function AddPages() {
         `${process.env.api}/pages`,
         data
       );
-      console.log(response.data);
+      // console.log(response.data);
       alert("Page added successfully");
     } catch (error) {
       console.log(error);

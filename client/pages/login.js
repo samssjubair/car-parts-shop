@@ -32,7 +32,7 @@ export default function Login() {
       redirect: false,
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.ok) {
           // Authenticate user
           router.push("/admin/dashboard");
@@ -45,7 +45,7 @@ export default function Login() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setPageState((old) => ({
           ...old,
           processing: false,

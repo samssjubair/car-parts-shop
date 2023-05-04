@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/', upload.single('favicon'), (req, res) => {
-    console.log('hi')
+    // console.log('hi')
   res.json({ message: 'Favicon uploaded successfully' });
 });
 

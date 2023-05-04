@@ -132,13 +132,6 @@ const Navigation = () => {
                       {
                         allRoutes.map((route,ind) => {
                           return (
-                            // <Link
-                            //   key={ind}
-                            //   href= {`/${route}`}
-                            //   className="text-base capitalize font-semibold leading-6 text-gray-900"
-                            // >
-                            //   {route}
-                            // </Link>
                             <Link
                             key={ind}
                              href= {`/${route}`}

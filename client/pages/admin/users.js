@@ -12,7 +12,7 @@ const users = () => {
   const handleDelete=(id)=>{
     axios.delete(`${process.env.api}/admin/deleteAdmin/${id}`)
     .then((res)=>{
-      console.log(res);
+    //   console.log(res);
       alert("Admin deleted successfully");
       window.location.reload();
     })
