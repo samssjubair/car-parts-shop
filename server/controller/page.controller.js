@@ -1,4 +1,4 @@
-const { savePageService, getPageByNameService } = require("../services/page.services");
+const { savePageService, getPageByNameService, updatePageByIdService } = require("../services/page.services");
 
 
 module.exports.savePages = async (req, res) => {
@@ -32,6 +32,24 @@ module.exports.getPage = async (req, res) => {
         res.status(400).json({
             success: false,
             message: "could not find page",
+            error: error.message
+        })
+    }
+}
+
+module.exports.updatePageById= async (req, res) => {
+    try {
+        const { id } = req.params;
+        const page = await updatePageByIdService(id, req.body);
+        res.status(200).json({
+            success: true,
+            message: "Page updated successfully",
+            data: page
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Error updating page",
             error: error.message
         })
     }

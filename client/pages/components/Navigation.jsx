@@ -23,7 +23,7 @@ const Navigation = () => {
     const [logoUrl, setLogoUrl] = useState('');
 
     useEffect(() => {
-      fetch('http://localhost:4800/api/v1/logo')
+      fetch(`${process.env.api}/logo`)
         .then(response => response.blob())
         .then(blob => {
           const url = URL.createObjectURL(blob);
@@ -32,7 +32,7 @@ const Navigation = () => {
     }, []);
 
     useEffect(() => {
-        axios.get("http://localhost:4800/api/v1/pages").then((res) => {
+        axios.get(`${process.env.api}/pages`).then((res) => {
             setAllAdminCreatedRoute(res.data.data);
         });
     }, []);
@@ -58,41 +58,42 @@ const Navigation = () => {
                 </Link>
               </div>
               <div className="flex">
-                <div className="flex lg:hidden">
-                <button
-                  type="button"
-                  className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                  onClick={() => setMobileMenuOpen(true)}
-                >
-                  <span className="sr-only">Open main menu</span>
-                  <Bars3Icon className="h-10 w-12" aria-hidden="true" />
-                </button>
-                </div>
-              <Popover.Group className="hidden lg:flex lg:gap-x-12">
-                {
-                  allRoutes.map((route,ind) => {
-                    return (
-                      <Link
-                        key={ind}
-                        href= {`/${route}`}
-                        
-                        className="text-sm capitalize font-semibold leading-6 text-gray-900"
-                      >
-                        {route}
-                      </Link>
-                    )
-                  })
-                }
                 
-              </Popover.Group>
-              <div className="flex lg:flex-1 lg:justify-end md:">
-                <Link
-                  href="tel: +1234567890"
-                  className="w-10 h-10 bg-lime-500 rounded-full "
-                >
-                  <BsWhatsapp className="w-5 h-5 navbar-icon"/>
-                </Link>
-              </div>
+                <Popover.Group className="hidden lg:flex lg:gap-x-12">
+                  {
+                    allRoutes.map((route,ind) => {
+                      return (
+                        <Link
+                          key={ind}
+                          href= {`/${route}`}
+                          
+                          className="text-sm capitalize font-semibold leading-6 text-gray-900"
+                        >
+                          {route}
+                        </Link>
+                      )
+                    })
+                  }
+                  
+                </Popover.Group>
+                <div className="flex lg:flex-1 lg:justify-end md:">
+                  <Link
+                    href="tel: +1234567890"
+                    className="w-10 h-10 bg-lime-500 rounded-full "
+                  >
+                    <BsWhatsapp className="w-5 h-5 navbar-icon"/>
+                  </Link>
+                </div>
+                <div className="flex lg:hidden">
+                  <button
+                    type="button"
+                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                    onClick={() => setMobileMenuOpen(true)}
+                  >
+                    <span className="sr-only">Open main menu</span>
+                    <Bars3Icon className="h-10 w-12" aria-hidden="true" />
+                  </button>
+                </div>
               </div>
             </nav>
             <Dialog

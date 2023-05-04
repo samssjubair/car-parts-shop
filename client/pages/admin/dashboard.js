@@ -8,8 +8,15 @@ import { FaUsers } from "react-icons/fa";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BiChevronDown } from "react-icons/bi";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const dashboard = ({ Children }) => {
+  const { data: session } = useSession();
+  // const userName = session?.user?.name;
+
+  console.log(session)
+
+  // const userName=
   // console.log(partEntries)
   return (
     <Sidebar >

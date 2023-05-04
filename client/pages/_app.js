@@ -13,7 +13,7 @@ export default function App({
   const [metatag, setMetatag] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:4800/api/v1/metadescription/")
+    fetch(`${process.env.api}/metadescription/`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.description,"description")
@@ -22,7 +22,7 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:4800/api/v1/metatag/")
+    fetch(`${process.env.api}/metatag/`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.tag,"tag")
@@ -31,7 +31,7 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:4800/api/v1/favicon/')
+    fetch(`${process.env.api}/favicon/`)
       .then(response => response.blob())
       .then(blob => {
         const url = URL.createObjectURL(blob);

@@ -30,7 +30,7 @@ const addAdmin = () => {
         status: adminStatus,
       };
       const response = await axios.post(
-        "http://localhost:4800/api/v1/admin/",
+        `${process.env.api}/admin/`,
         JSON.stringify(body),
         {
           headers: {

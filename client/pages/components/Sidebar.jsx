@@ -15,7 +15,7 @@ const Sidebar = ({children}) => {
   const router = useRouter();
   const [siteName, setSiteName] = useState('');
   useEffect(() => {
-    axios.get('http://localhost:4800/api/v1/sitename')
+    axios.get(`${process.env.api}/sitename`)
       .then(res => {
         setSiteName(res.data.appName)
         // setSiteName(res.data.data[0].appName)

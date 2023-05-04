@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    carBrandApiKey: "449fc12783msh5606707276ab2a8p1a0ab0jsn91e6b618962b",
+    carModelApiKey: "449fc12783msh5606707276ab2a8p1a0ab0jsn91e6b618962b",
+    api: "http://localhost:4800/api/v1",
+  }
 }
 
 module.exports = nextConfig

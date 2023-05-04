@@ -18,7 +18,7 @@ function settings() {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4800/api/v1/metatag/").then((res) => {
+    axios.get(`${process.env.api}/metatag/`).then((res) => {
       // console.log(res.data.tag)
       // setKeywords(res.data.tag)
       const keywords = res.data.tag.split(",");
@@ -27,9 +27,9 @@ function settings() {
   }, []);
 
   const saveMetaTag = (tg) => {
-    console.log("tgggg", tg.join(","));
+    // console.log("tgggg", tg.join(","));
     axios
-      .put("http://localhost:4800/api/v1/metatag/", {
+      .put(`${process.env.api}/metatag/`, {
         tag: tg.join(", "),
       })
       .then((res) => {
@@ -68,7 +68,7 @@ function settings() {
   // };
 
   useEffect(() => {
-    axios.get("http://localhost:4800/api/v1/metadescription/").then((res) => {
+    axios.get(`${process.env.api}/metadescription/`).then((res) => {
       // console.log(res.data);
       setMetaDescription(res.data.description);
     });
@@ -78,7 +78,7 @@ function settings() {
     // e.preventDefault();
     // console.log(e.target.value);
     axios
-      .put("http://localhost:4800/api/v1/metadescription/", {
+      .put(`${process.env.api}/metadescription/`, {
         description: e.target.value,
       })
       .then((res) => {
@@ -90,7 +90,7 @@ function settings() {
     // e.preventDefault();
     // console.log(e.target.value);
     axios
-      .patch("http://localhost:4800/api/v1/sitename/", {
+      .patch(`${process.env.api}/sitename/`, {
         appName: e.target.value,
       })
       .then((res) => {
@@ -109,7 +109,7 @@ function settings() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4800/api/v1/logo/",
+        `${process.env.api}/logo/`,
         formData
       );
       // console.log(response.data);
@@ -129,7 +129,7 @@ function settings() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4800/api/v1/favicon/",
+        `${process.env.api}/favicon/`,
         formData
       );
       // console.log(response.data);
@@ -172,7 +172,7 @@ function settings() {
                 </div>
               </div>
               <div>
-                <label className="ml-4">Site Title</label>
+                <label className="pb-2 text-lg font-bold">Site Title</label>
                 <input
                   type="text"
                   // value={title}
@@ -182,21 +182,14 @@ function settings() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-5">
                 <div className="">
                   <div>
-                    <h3 className="pb-2">logo</h3>
+                    <h3 className="pb-2 text-lg font-bold ">Logo</h3>
                   </div>
                   <form onSubmit={handleLogoUpload} className="flex">
+                    
                     <div>
-                      <button
-                        type="submit"
-                        className="settings-btn hover:bg-slate-300 focus:outline-none"
-                      >
-                        Upload
-                      </button>
-                    </div>
-                    <div className="ml-10">
                       <label
                         htmlFor="logo-upload"
                         className="flex flex-col items-center px-8 py-4 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
@@ -224,22 +217,22 @@ function settings() {
                         />
                       </label>
                     </div>
-                  </form>
-                </div>
-                <div className="">
-                  <div>
-                    <h3 className="pb-2">favicon</h3>
-                  </div>
-                  <form onSubmit={handleFaviconUpload} className="flex">
                     <div>
                       <button
                         type="submit"
-                        className="settings-btn hover:bg-slate-300 focus:outline-none "
+                        className="border-2 rounded-md p-2 ms-3 border-gray-300 hover:bg-slate-300 focus:outline-none"
                       >
                         Upload
                       </button>
                     </div>
-                    <div className="ml-10">
+                  </form>
+                </div>
+                <div className="">
+                  <div>
+                    <h3 className="pb-2 text-lg font-bold">Favicon</h3>
+                  </div>
+                  <form onSubmit={handleFaviconUpload} className="flex">
+                  <div className="">
                       <label
                         htmlFor="favicon-upload"
                         className="flex flex-col items-center px-8 py-4 bg-white border-2 border-gray-300 rounded-md cursor-pointer hover:bg-gray-50"
@@ -267,6 +260,15 @@ function settings() {
                         />
                       </label>
                     </div>
+                    <div>
+                      <button
+                        type="submit"
+                        className="border-2 rounded-md p-2 border-gray-300 ms-3 hover:bg-slate-300 focus:outline-none "
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
@@ -296,6 +298,8 @@ function settings() {
                 </div>
               </div> */}
 
+              <div>
+                <h3 className="pb-2 text-lg font-bold mt-5">SEO Keywords</h3>
               <div className="tags-input-container">
                 {tags.map((tag, index) => (
                   <div className="tag-item " key={index}>
@@ -309,19 +313,20 @@ function settings() {
                   onKeyDown={handleKeyDown}
                   type="text"
                   className="tags-input "
-                  placeholder="Type somthing"
+                  placeholder="Type a new Keyword"
                 />
+              </div>
               </div>
 
               <div className="mt-7">
-                <label className="ml-4">SEO Description</label>
+                <label className="pb-2 text-lg font-bold">SEO Description</label>
                 <textarea
                   value={metaDescription}
                   onChange={(e) => setMetaDescription(e.target.value)}
                   onBlur={handleDescriptionBlur}
                   type="text"
                   placeholder="Here is the text space for seo description for the site where admin can write free text"
-                  className="pt-3 pl-5 h-64 w-full rounded-md text-sm"
+                  className="pt-3 pl-5 h-32 w-full rounded-md text-sm"
                 />
               </div>
             </div>

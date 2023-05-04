@@ -20,3 +20,10 @@ module.exports.getPageByNameService= async (route)=>{
         return pages;
     }
 }
+
+module.exports.updatePageByIdService= async (id, data)=>{
+    const result= await Page.updateOne({_id: id}, {$set: data},{
+        runValidators: true
+    });
+    return result;
+}

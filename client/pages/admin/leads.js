@@ -6,7 +6,7 @@ const leads = () => {
   const [partEntries, setPartEntries] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4800/api/v1/entries?sort=-createdAt")
+    fetch(`${process.env.api}/entries?sort=-createdAt`)
       .then((res) => res.json())
       .then((data) => setPartEntries(data.data));
   }, []);
